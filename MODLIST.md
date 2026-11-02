@@ -1,19 +1,30 @@
-# Conteúdo inicial do manifest e planos
+# Mikael StoneBlock Lite 0.2.0
 
-## Já referenciado no manifest CurseForge 0.1.0
+Minecraft 1.12.2; Forge 14.23.5.2860.
 
-| Projeto | Arquivo | ID CurseForge | Observação |
+| Mod | Versão | CurseForge project/file | Papel |
 |---|---|---:|---|
-| StoneBlock Utilities | 2.2.0 (beta) | project 282561 / file 9131646 | Página do arquivo diz Minecraft 1.12.2 e Forge 14.23.5.2792 ou superior. Beta; versão não testada neste pack. |
-| FoamFix | 0.10.15 | project 278494 / file 3973967 | Arquivo para 1.12.2. Compatibilidade no launcher Android ainda precisa teste. |
-| Just Enough Items (JEI) | 4.16.1.301 | project 238222 / file 3040523 | Arquivo de 1.12.2, para consultar itens e receitas. |
+| StoneBlock Utilities | 2.1.5 | 282561/2706845 | incluído |
+| FoamFix | 0.10.15 | 278494/3973967 | incluído |
+| JEI | 4.16.1.297 | 238222/2995897 | incluído |
+| Ex Nihilo Creatio | 0.4.7.2 | 274456/2817545 | incluído |
+| Void Island Control | 1.5.3 | 257655/2666967 | incluído |
+| FTB Library | 5.4.7.2 | 237167/2985811 | incluído |
+| FTB Quests | 1.4.1.112 | 289412/2659058 | incluído |
+| Item Filters | 1.0.4.2 | 309674/3003364 | incluído |
+| CoFH Core | 4.6.6.1 | 69162/2920433 | incluído |
+| Redstone Flux | 2.1.1.1 | 270789/2920436 | incluído |
+| Thermal Foundation | 2.6.7.1 | 222880/2926428 | incluído |
+| Thermal Expansion | 5.5.7.1 | 69163/2926431 | incluído |
 
-## Ainda falta para ser um modpack jogável completo
+## Mundo e progressão StoneBlock
 
-- FTB Quests e suas dependências exatas para Forge 1.12.2.
-- Conteúdo de máquinas/magia escolhido sem exceder o foco Lite; Thermal e Mekanism são apenas candidatos, não estão no manifest.
-- Configuração de mundo StoneBlock e mecânicas iniciais validadas.
-- Quests com IDs, metadados, receitas e cadeias de obtenção verificados nos mods exatos.
-- Teste de instalação no launcher alvo e teste in-game; nada disso foi feito ainda.
+Overrides incluem a configuração Void Island Control e o NBT de ilha do StoneBlock 1.0.37. O arquivo configura geração SUPERFLAT com pedra/lava e ilha inicial customizada chamada `island`; auto-criação fica ativa. No single-player selecione o tipo `Void? World`; no servidor configure `level-type=voidworld` antes de gerar o mundo. StoneBlock Utilities configura drops de pedrinhas e crook, com Ex Nihilo Creatio como origem das pedrinhas.
 
-Não subir arquivos JAR de terceiros ao GitHub. O launcher resolve as referências CurseForge; conferir as licenças de cada projeto antes de redistribuir qualquer arquivo fora da plataforma. OptiFine permanece fora do pack.
+## FTB Quests
+
+FTB Quests 1.4.1.112 está no manifest junto com FTB Library 5.4.7.2 e Item Filters 1.0.4.2. O mod está instalado, mas **ainda não há capítulos/quests personalizados**; isso precisa ser criado e validado in-game com os IDs/metadados das receitas reais.
+
+## Validação
+
+IDs de CurseForge e versões Minecraft 1.12.2 foram conferidos. JSON do manifest e estrutura ZIP são validados; nenhum teste de inicialização ou mundo no launcher do usuário foi executado.
