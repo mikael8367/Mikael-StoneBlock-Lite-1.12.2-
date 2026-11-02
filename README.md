@@ -6,7 +6,7 @@ Modpack em montagem para Minecraft Java 1.12.2, usando Forge 14.23.5.2860. Objet
 
 O repositório contém um `manifest.json` CurseForge com dois mods referenciados por IDs, Forge 14.23.5.2860 e pasta `overrides/`. Isso dá a estrutura de um modpack CurseForge, mas ainda não representa um pacote final ou testado: faltam mods importantes para jogar/construir a progressão completa, configurações, quests e testes num launcher.
 
-O manifest usa o formato de exportação CurseForge; cada mod é identificado por `projectID` e `fileID` e o conteúdo de `overrides/` é copiado para a instância.
+O manifest usa o formato CurseForge; cada mod é identificado por `projectID` e `fileID`, e o conteúdo de `overrides/` é copiado para a instância. Nesta versão estão referenciados StoneBlock Utilities 2.2.0 (beta), FoamFix 0.10.15 e JEI 4.16.1.301.
 
 ## Como importar
 
@@ -18,7 +18,7 @@ O manifest usa o formato de exportação CurseForge; cada mod é identificado po
 
 ## Conteúdo atual
 
-- `manifest.json` — Minecraft 1.12.2, Forge 14.23.5.2860, dois mods referenciados.
+- `manifest.json` — Minecraft 1.12.2, Forge 14.23.5.2860, três mods referenciados.
 - `overrides/` — pasta reservada para configurações, scripts e quests do pack.
 - `modlist.html` — lista humana dos dois mods do manifest.
 - `MODLIST.md` — conteúdo proposto e validações pendentes.
