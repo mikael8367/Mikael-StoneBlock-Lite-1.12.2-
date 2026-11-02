@@ -1,4 +1,4 @@
-# Lista — Mikael StoneBlock Lite 0.5.1
+# Lista — Mikael StoneBlock Lite 0.5.2
 
 | Mod | Versão | CurseForge project/file |
 |---|---|---:|
@@ -69,3 +69,7 @@
 - Project Exploit permanece 1.3.2 Alpha e abandonado, pois não existe arquivo 1.12.2 mais novo que eu tenha verificado.
 - FTB Quests está instalado, mas ainda sem capítulos/missões personalizadas.
 - Manifest e ZIP validados estruturalmente; não testados no launcher ou telefone. O conjunto de 60 mods pode ser pesado para o Galaxy A12.
+
+
+## Idioma
+Inclui `overrides/options.txt` com `lang:pt_br` para selecionar Português (Brasil) automaticamente. Mods sem tradução pt_BR podem continuar mostrando textos em inglês.
