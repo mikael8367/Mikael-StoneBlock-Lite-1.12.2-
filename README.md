@@ -1,14 +1,11 @@
-# Mikael StoneBlock Lite 0.5.6 — crescimento ao agachar
+# Mikael StoneBlock Lite 0.5.7 — correção Game Stages
 
-Minecraft Java 1.12.2 / Forge 14.23.5.2860. OptiFine HD U G5 é instalado separadamente e não está incluído.
+Minecraft 1.12.2 / Forge 14.23.5.2860.
 
-## Alterações
-- Twerk Sim 2K16 1.2.10 (CurseForge project 251301, file 2659489): agachar ou correr perto de árvores, culturas e outras plantas compatíveis com farinha de osso estimula seu crescimento.
-- Game Stages 1.0.84 (project 268655, file 2543589), dependência declarada pelo Twerk Sim.
-- Preserva o Mystical Agriculture 1.7.5 + Cucumber Library 1.1.3, e o livro FTB Quests com 1.335 missões/objetivos distintos.
+## Correção
+A imagem do erro mostrou duas cópias do mod com o ID gamestages: GameStages 2.0.123 e 1.0.84. O perfil base já continha Game Stages 2.0.123; removi do manifesto a referência extra a 1.0.84. O Twerk Sim 2K16 1.2.10 permanece incluído e usa a cópia existente de Game Stages. Não instale outra versão por cima.
 
 ## Download
-[Baixar o ZIP completo 0.5.6](https://raw.githubusercontent.com/mikael8367/Mikael-StoneBlock-Lite-1.12.2-/main/Mikael-StoneBlock-Lite-0.5.6.zip)
+[Baixar o ZIP corrigido 0.5.7](https://raw.githubusercontent.com/mikael8367/Mikael-StoneBlock-Lite-1.12.2-/main/Mikael-StoneBlock-Lite-0.5.7.zip)
 
-## Validação
-ZIP e manifesto conferidos. Não testado no launcher. O mod declara que plantas compatíveis com farinha de osso podem crescer com twerk/sprint; a interação com cada cultura do Mystical Agriculture precisa ser confirmada dentro do jogo. Para importar quests/configs com segurança, prefira uma instância nova ou faça backup da existente.
+O manifesto foi validado estruturalmente: apenas uma referência Game Stages, versão 2.0.123, e Twerk Sim presente. Ainda não testado no launcher; remova o GameStages 1.0.84 da pasta mods da instância antiga ou importe o perfil corrigido numa instância limpa. Faça backup antes.
