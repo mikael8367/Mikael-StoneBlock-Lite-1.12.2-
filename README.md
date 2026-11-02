@@ -1,16 +1,17 @@
-# Mikael StoneBlock Lite 0.5.2
+# Mikael StoneBlock Lite 0.5.3 — perfil OptiFine
 
-Minecraft Java 1.12.2 / Forge 14.23.5.2860. Inclui 60 referências CurseForge.
+Minecraft Java 1.12.2 / Forge 14.23.5.2860. Este perfil foi ajustado para uso com OptiFine HD U G5, que deve ser baixado pelo usuário no site oficial e instalado separadamente. O OptiFine não vem incluído no ZIP.
 
-## Idioma
-O perfil inclui `options.txt` com `lang:pt_br` para selecionar Português (Brasil) ao iniciar. Textos de mods sem tradução pt_BR continuarão no idioma fornecido por cada mod, frequentemente inglês.
+## Alterações de compatibilidade
+- Removido FoamFix: o próprio projeto informa que OptiFine não é suportado, portanto não dá garantia de compatibilidade dessa combinação.
+- Removido TexFix: FoamFix também lista TexFix como não suportado; para reduzir incompatibilidades no perfil destinado ao OptiFine, ambos foram retirados.
+- Mantido VanillaFix: a documentação do mod declara compatibilidade com OptiFine e outros mods de otimização.
+- Mantido o resto das 58 referências CurseForge, selecionadas para Minecraft 1.12.2.
 
-## Mundo StoneBlock
-Single-player: selecione `Void? World` ao criar mundo. Em servidor, use `level-type=voidworld` antes de gerar o mundo. A configuração usa StoneBlock Utilities 2.1.5 e seu JSON corrigido (`handDrops`/`crookDrops`).
+## Configurações do perfil
+- Idioma padrão: Português (Brasil), `lang:pt_br`.
+- StoneBlock Utilities 2.1.5: configuração no formato `handDrops`/`crookDrops`.
+- Single-player: escolher `Void? World`; servidor: `level-type=voidworld` antes de criar o mundo.
 
-## Notas e limitações
-- Mods de Minecraft 1.12.2; não usar versões de outras versões do Minecraft.
-- Project Exploit 1.3.2 é Alpha/abandonado.
-- FTB Quests está instalado, ainda sem capítulos ou missões personalizadas.
-- “Zapia No Shaderpacks” e “FoamFix Core 7.7.4” não foram encontrados como mods públicos identificáveis para Forge 1.12.2.
-- ZIP validado estruturalmente, ainda não iniciado/testado no launcher ou aparelho.
+## Limitações
+Nenhum pack com dezenas de mods pode ser certificado para OptiFine sem iniciar e testar a combinação no mesmo launcher/dispositivo. Esta distribuição remove conflitos conhecidos, mas não prova compatibilidade total. FTB Quests ainda não tem capítulos personalizados.
