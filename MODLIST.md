@@ -1,9 +1,9 @@
-# Mikael StoneBlock Lite 0.5.5
-
+# Mikael StoneBlock Lite 0.5.6
 - Minecraft 1.12.2 / Forge 14.23.5.2860
-- 60 referências CurseForge (mods originais do perfil + Mystical Agriculture/Cucumber)
-- Mystical Agriculture 1.7.5 — CurseForge file 2704562
-- Cucumber Library 1.1.3 — CurseForge file 2645867
-- FTB Quests: 1.335 missões com 1.335 alvos item/metadata exclusivos e recompensas.
-- OptiFine HD U G5 deve ser instalado separadamente; não está no ZIP.
-- Arquivos/índices e referências do livro validados estruturalmente; ainda não testado no launcher.
+- 62 referências CurseForge
+- Twerk Sim 2K16 1.2.10 (project 251301 / file 2659489): crescimento por agachar/correr
+- Game Stages 1.0.84 (project 268655 / file 2543589): dependência do Twerk Sim
+- Mystical Agriculture 1.7.5 + Cucumber 1.1.3
+- FTB Quests: 1.335 missões e objetivos de item/metadata sem repetição, com recompensas
+- OptiFine HD U G5 fica fora do ZIP; instalar separadamente
+- ZIP validado estruturalmente, sem teste de execução no launcher.
