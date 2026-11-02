@@ -1,17 +1,14 @@
-# Mikael StoneBlock Lite 0.4.0
+# Mikael StoneBlock Lite 0.5.0
 
-Minecraft Java 1.12.2 / Forge 14.23.5.2860. O perfil foi ampliado com a lista de mods enviada: 60 arquivos CurseForge pinned, todos identificados como compatíveis com 1.12.2.
+Minecraft Java 1.12.2 / Forge 14.23.5.2860. Versões atualizadas sempre dentro de 1.12.2. Para atender ao pedido de compatibilidade, Draconic Additions foi alinhado para 1.14.1.37 com Draconic Evolution 2.3.27.353 e Brandon's Core 2.4.19.214: a versão de DA 1.14.1.37 é a que seus dados de changelog associam à versão DE 2.3.27.353. Ainda assim, sem ensaio runtime não posso prometer compatibilidade completa.
 
-## Instalação e mundo
+## Criar mundo StoneBlock
 
-Importe o ZIP em launcher compatível com modpacks CurseForge. No single-player crie um mundo novo usando `Void? World`. No servidor, aplique `level-type=voidworld` antes de gerar o mundo. O ZIP leva configs de Void Island Control, estrutura NBT inicial e StoneBlock Utilities 2.1.5.
+Single-player: selecione `Void? World` em mundo novo. Servidor: use `level-type=voidworld` antes de gerar o mundo. As configurações e ilha inicial estão nos overrides, alinhados com StoneBlock Utilities 2.1.5.
 
-## Ressalvas
+## Observações
 
-Não foi possível encontrar como arquivos públicos CurseForge para 1.12.2 “Zapia No Shaderpacks 1.0.0” nem “FoamFix Core 7.7.4” como mod separado; não inventei IDs. FoamFix 0.10.15 já está incluído. Project Exploit 1.3.2 está incluído, mas é Alpha e projeto abandonado. Draconic Additions 1.17.0.45 com Draconic Evolution 2.3.27.353 e Brandon's Core 2.4.19.214 requer teste de compatibilidade.
-
-O arquivo de FTB Quests está declarado para MC 1.12.2; FTB Quests está instalado, mas não há ainda capítulos/missões customizados.
-
-Manifest/ZIP/configs foram validados estruturalmente; não testei inicialização ou mundo no Galaxy A12. Com 60 mods, este pack é pesado para celular de entrada e pode exceder memória/armazenamento. Faça backup e teste em instância nova.
-
-Lista completa: veja `MODLIST.md`.
+- “Zapia No Shaderpacks” e “FoamFix Core 7.7.4” não foram encontrados como mods públicos identificáveis para Forge 1.12.2; não adicionei IDs inventados.
+- Project Exploit permanece 1.3.2 Alpha e abandonado, pois não existe arquivo 1.12.2 mais novo que eu tenha verificado.
+- FTB Quests está instalado, mas ainda sem capítulos/missões personalizadas.
+- Manifest e ZIP validados estruturalmente; não testados no launcher ou telefone. O conjunto de 60 mods pode ser pesado para o Galaxy A12.
