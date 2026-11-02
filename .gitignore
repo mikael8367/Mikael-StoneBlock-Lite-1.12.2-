@@ -1,0 +1,16 @@
+# Distribuição de mods: não subir JARs sem confirmar autorização/licença
+*.jar
+*.zip
+*.mrpack
+
+# Mundos e dados de usuário
+saves/
+*.dat
+*.mca
+
+# Logs e temporários
+logs/
+crash-reports/
+*.log
+.DS_Store
+Thumbs.db
