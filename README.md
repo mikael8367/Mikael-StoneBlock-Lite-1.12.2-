@@ -1,33 +1,21 @@
 # Mikael StoneBlock Lite 1.12.2
 
-Modpack em montagem para Minecraft Java 1.12.2, usando Forge 14.23.5.2860. Objetivo: progressão StoneBlock com seleção moderada e compatibilidade a verificar em dispositivos com memória limitada.
+Versão 0.2.0 — manifest CurseForge para Minecraft Java 1.12.2 / Forge 14.23.5.2860. Inclui o mundo de pedra com ilha inicial, Ex Nihilo + Thermal para progressão, e FTB Quests.
 
-## Estado atual: esqueleto importável, ainda incompleto
+## Importar
 
-O repositório contém um `manifest.json` CurseForge com dois mods referenciados por IDs, Forge 14.23.5.2860 e pasta `overrides/`. Isso dá a estrutura de um modpack CurseForge, mas ainda não representa um pacote final ou testado: faltam mods importantes para jogar/construir a progressão completa, configurações, quests e testes num launcher.
+Baixe `Mikael-StoneBlock-Lite-0.2.0.zip` e importe no CurseForge App ou launcher compatível com manifest CurseForge. O launcher baixa os mods pelas referências CurseForge; não incluí JARs.
 
-O manifest usa o formato CurseForge; cada mod é identificado por `projectID` e `fileID`, e o conteúdo de `overrides/` é copiado para a instância. Nesta versão estão referenciados StoneBlock Utilities 2.2.0 (beta), FoamFix 0.10.15 e JEI 4.16.1.301.
+Para single-player, crie um mundo com o tipo `Void? World` do Void Island Control. Em servidor dedicado, antes de gerar o mundo, defina `level-type=voidworld` em `server.properties` (há exemplo em `server.properties.example`). O perfil inclui configuração de mundo superflat de pedra/lava, ilha inicial NBT e a configuração de StoneBlock Utilities para pedrinhas/crook.
 
-## Como importar
+## Conteúdo
 
-1. Baixe o ZIP desta versão pelo GitHub (Code → Download ZIP).
-2. Importe o ZIP no CurseForge App ou em um launcher compatível com manifest CurseForge.
-3. Se o launcher disser que há poucos mods ou que o pack está incompleto, isso é esperado nesta versão de rascunho.
+- Void Island Control 1.5.3 + configuração e estrutura da ilha inicial do StoneBlock 1.12.2.
+- StoneBlock Utilities 2.1.5 + Ex Nihilo Creatio 0.4.7.2 para progressão inicial.
+- Thermal Foundation/Expansion + dependências CoFH Core e Redstone Flux.
+- FTB Quests 1.4.1.112, FTB Library e Item Filters.
+- JEI e FoamFix.
 
-**Não renomeie o repositório inteiro para `.mrpack`:** a estrutura aqui é CurseForge `manifest.json`, não Modrinth `modrinth.index.json`.
+## Importante
 
-## Conteúdo atual
-
-- `manifest.json` — Minecraft 1.12.2, Forge 14.23.5.2860, três mods referenciados.
-- `overrides/` — pasta reservada para configurações, scripts e quests do pack.
-- `modlist.html` — lista humana dos dois mods do manifest.
-- `MODLIST.md` — conteúdo proposto e validações pendentes.
-
-## Testes pendentes
-
-- Completar e verificar a lista de mods, dependências e arquivos CurseForge.
-- Adicionar JEI e os mods de quests e dependências depois de conferir versões e arquivos exatos.
-- Configurar e testar progressão StoneBlock desde o início, incluindo receitas/itens realmente disponíveis.
-- Testar inicialização e consumo de memória no launcher/dispositivo-alvo. Estrutura e JSON válidos não provam que o jogo inicia.
-
-Não há JARs embutidos; o launcher baixa os arquivos referenciados. Respeite as licenças e permissões de cada mod. OptiFine não é distribuído neste pack.
+É um perfil inicial, **não testado em jogo**. FTB Quests está no manifest, mas ainda não tem capítulos/quests escritos para este modpack. O ZIP e o JSON são verificados estruturalmente; isso não prova que o launcher do celular inicia nem que a geração da ilha funciona. O pack é consideravelmente menor que o StoneBlock original, porém o Galaxy A12 tem RAM limitada; verificar estabilidade e memória no próprio aparelho.
