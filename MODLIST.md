@@ -1,24 +1,19 @@
-# Lista inicial proposta
+# Conteúdo inicial do manifest e planos
 
-**Não é lista final nem manifest de instalação.** Os itens abaixo foram escolhidos como candidatos a conferir para um StoneBlock leve. Versões, disponibilidade correta para 1.12.2, dependências transitivas, licença e impacto de desempenho ainda precisam ser confirmados.
+## Já referenciado no manifest CurseForge 0.1.0
 
-| Área | Projeto candidato | Papel / validação necessária |
-|---|---|---|
-| Mundo e progressão | StoneBlockUtilities | Mecânica de stone, pedrinhas, crook e receitas; confirmar versão e configuração. |
-| Progressão alternativa | Ex Nihilo Creatio | Confirmar compatibilidade/integração com a mecânica escolhida; não adicionar mecânicas duplicadas sem teste. |
-| Quests | FTB Quests | Conferir dependências da versão 1.12.2, itens e receitas reais. |
-| Filtros de quests | Item Filters | Dependência provável para FTB Quests; conferir versão exata. |
-| Máquinas | Thermal Foundation + Thermal Expansion | Escolher módulos de acordo com dependências, memória e receitas; validar IDs/meta. |
-| Máquinas / energia | Mekanism | Candidato opcional; conferir tamanho do perfil e dependências. |
-| Magia | Botania | Candidato opcional; conteúdo e cadeia de progressão precisam caber na memória. |
-| Qualidade de vida | Twerk Sim 2K16 | Avaliar crescimento de plantas e dependência GameStages; testar no mundo inicial. |
-| Otimização | FoamFix | Candidato a teste de compatibilidade no launcher Android; não presumir ganho ou estabilidade. |
+| Projeto | Arquivo | ID CurseForge | Observação |
+|---|---|---:|---|
+| StoneBlock Utilities | 2.2.0 (beta) | project 282561 / file 9131646 | Página do arquivo diz Minecraft 1.12.2 e Forge 14.23.5.2792 ou superior. Beta; versão não testada neste pack. |
+| FoamFix | 0.10.15 | project 278494 / file 3973967 | Arquivo para 1.12.2. Compatibilidade no launcher Android ainda precisa teste. |
+| Just Enough Items (JEI) | 4.16.1.301 | project 238222 / file 3040523 | Arquivo de 1.12.2, para consultar itens e receitas. |
 
-## Regras para fechar a lista
+## Ainda falta para ser um modpack jogável completo
 
-- Incluir somente mods com arquivo oficial para Minecraft 1.12.2 e Forge.
-- Confirmar versão, dependências e permissão de redistribuição individualmente.
-- Manter OneBlock e StoneBlock como modos distintos; este projeto é StoneBlock.
-- Não criar quests de coleta com item ou metadado presumido.
-- Não adicionar mod conhecido por crash no perfil anterior sem explicar a mudança e testar novamente.
-- Não distribuir OptiFine embutido.
+- FTB Quests e suas dependências exatas para Forge 1.12.2.
+- Conteúdo de máquinas/magia escolhido sem exceder o foco Lite; Thermal e Mekanism são apenas candidatos, não estão no manifest.
+- Configuração de mundo StoneBlock e mecânicas iniciais validadas.
+- Quests com IDs, metadados, receitas e cadeias de obtenção verificados nos mods exatos.
+- Teste de instalação no launcher alvo e teste in-game; nada disso foi feito ainda.
+
+Não subir arquivos JAR de terceiros ao GitHub. O launcher resolve as referências CurseForge; conferir as licenças de cada projeto antes de redistribuir qualquer arquivo fora da plataforma. OptiFine permanece fora do pack.
