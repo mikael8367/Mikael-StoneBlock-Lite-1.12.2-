@@ -1,7 +1,9 @@
-# Lista — Mikael StoneBlock Lite 0.5.4
+# Mikael StoneBlock Lite 0.5.5
 
-- Minecraft Java 1.12.2 / Forge 14.23.5.2860.
-- 58 referências de mods CurseForge; OptiFine HD U G5 deve ser instalado separadamente.
-- FTB Quests 1202.9.0.15, Item Filters 1.0.4.2 e FTB Library 5.4.7.2.
-- Livro: 1.000 missões, 1.000 objetivos de item únicos (incluindo variantes/metadata); todas com tarefa e recompensa.
-- Estrutura SNBT, índices e unicidade conferidos; não testado no launcher.
+- Minecraft 1.12.2 / Forge 14.23.5.2860
+- 60 referências CurseForge (mods originais do perfil + Mystical Agriculture/Cucumber)
+- Mystical Agriculture 1.7.5 — CurseForge file 2704562
+- Cucumber Library 1.1.3 — CurseForge file 2645867
+- FTB Quests: 1.335 missões com 1.335 alvos item/metadata exclusivos e recompensas.
+- OptiFine HD U G5 deve ser instalado separadamente; não está no ZIP.
+- Arquivos/índices e referências do livro validados estruturalmente; ainda não testado no launcher.
