@@ -1,4 +1,4 @@
-# Lista — Mikael StoneBlock Lite 0.5.2
+# Lista — Mikael StoneBlock Lite 0.5.3
 
 | Mod | Versão | CurseForge project/file |
 |---|---|---:|
@@ -73,3 +73,7 @@
 
 ## Idioma
 Inclui `overrides/options.txt` com `lang:pt_br` para selecionar Português (Brasil) automaticamente. Mods sem tradução pt_BR podem continuar mostrando textos em inglês.
+
+
+## Perfil OptiFine HD U G5
+FoamFix e TexFix foram removidos por conflitos/ausência de suporte documentados. OptiFine é proprietário e não está embutido; instalar separadamente. VanillaFix declara compatibilidade com OptiFine. Compatibilidade integral não foi validada por teste runtime.
