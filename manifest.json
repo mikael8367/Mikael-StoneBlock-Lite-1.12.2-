@@ -11,7 +11,7 @@
   "manifestType": "minecraftModpack",
   "manifestVersion": 1,
   "name": "Mikael StoneBlock Lite",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": "Mikael8367",
   "files": [
     {
@@ -26,7 +26,7 @@
     },
     {
       "projectID": 238222,
-      "fileID": 3040523,
+      "fileID": 8964563,
       "required": true
     },
     {
@@ -196,7 +196,7 @@
     },
     {
       "projectID": 228404,
-      "fileID": 2628666,
+      "fileID": 3117927,
       "required": true
     },
     {
@@ -231,7 +231,7 @@
     },
     {
       "projectID": 314515,
-      "fileID": 3514704,
+      "fileID": 3051992,
       "required": true
     },
     {
@@ -251,7 +251,7 @@
     },
     {
       "projectID": 228756,
-      "fileID": 2721036,
+      "fileID": 2747935,
       "required": true
     },
     {
@@ -306,7 +306,7 @@
     },
     {
       "projectID": 228525,
-      "fileID": 2612254,
+      "fileID": 2836960,
       "required": true
     },
     {
