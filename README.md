@@ -1,4 +1,4 @@
-# Mikael StoneBlock Lite 0.5.0
+# Mikael StoneBlock Lite 0.5.1
 
 Minecraft Java 1.12.2 / Forge 14.23.5.2860. Versões atualizadas sempre dentro de 1.12.2. Para atender ao pedido de compatibilidade, Draconic Additions foi alinhado para 1.14.1.37 com Draconic Evolution 2.3.27.353 e Brandon's Core 2.4.19.214: a versão de DA 1.14.1.37 é a que seus dados de changelog associam à versão DE 2.3.27.353. Ainda assim, sem ensaio runtime não posso prometer compatibilidade completa.
 
