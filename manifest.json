@@ -1,0 +1,29 @@
+{
+  "minecraft": {
+    "version": "1.12.2",
+    "modLoaders": [
+      {
+        "id": "forge-14.23.5.2860",
+        "primary": true
+      }
+    ]
+  },
+  "manifestType": "minecraftModpack",
+  "manifestVersion": 1,
+  "name": "Mikael StoneBlock Lite",
+  "version": "0.1.0",
+  "author": "Mikael8367",
+  "files": [
+    {
+      "projectID": 282561,
+      "fileID": 9131646,
+      "required": true
+    },
+    {
+      "projectID": 278494,
+      "fileID": 3973967,
+      "required": true
+    }
+  ],
+  "overrides": "overrides"
+}
