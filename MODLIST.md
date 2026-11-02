@@ -4,7 +4,7 @@ Minecraft 1.12.2 / Forge 14.23.5.2860.
 
 | Mod | Versão | CurseForge project/file |
 |---|---|---:|
-| StoneBlock Utilities | 2.1.5 | 282561/2706845 |
+| StoneBlock Utilities | 2.2.0 beta | 282561/2706845 |
 | FoamFix | 0.10.15 | 278494/3973967 |
 | JEI | 4.16.1.297 | 238222/2995897 |
 | Ex Nihilo Creatio | 0.4.7.2 | 274456/2817545 |
