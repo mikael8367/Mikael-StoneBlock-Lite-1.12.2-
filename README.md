@@ -1,14 +1,16 @@
-# Mikael StoneBlock Lite 0.5.1
+# Mikael StoneBlock Lite 0.5.2
 
-Minecraft Java 1.12.2 / Forge 14.23.5.2860. Versões atualizadas sempre dentro de 1.12.2. Para atender ao pedido de compatibilidade, Draconic Additions foi alinhado para 1.14.1.37 com Draconic Evolution 2.3.27.353 e Brandon's Core 2.4.19.214: a versão de DA 1.14.1.37 é a que seus dados de changelog associam à versão DE 2.3.27.353. Ainda assim, sem ensaio runtime não posso prometer compatibilidade completa.
+Minecraft Java 1.12.2 / Forge 14.23.5.2860. Inclui 60 referências CurseForge.
 
-## Criar mundo StoneBlock
+## Idioma
+O perfil inclui `options.txt` com `lang:pt_br` para selecionar Português (Brasil) ao iniciar. Textos de mods sem tradução pt_BR continuarão no idioma fornecido por cada mod, frequentemente inglês.
 
-Single-player: selecione `Void? World` em mundo novo. Servidor: use `level-type=voidworld` antes de gerar o mundo. As configurações e ilha inicial estão nos overrides, alinhados com StoneBlock Utilities 2.1.5.
+## Mundo StoneBlock
+Single-player: selecione `Void? World` ao criar mundo. Em servidor, use `level-type=voidworld` antes de gerar o mundo. A configuração usa StoneBlock Utilities 2.1.5 e seu JSON corrigido (`handDrops`/`crookDrops`).
 
-## Observações
-
-- “Zapia No Shaderpacks” e “FoamFix Core 7.7.4” não foram encontrados como mods públicos identificáveis para Forge 1.12.2; não adicionei IDs inventados.
-- Project Exploit permanece 1.3.2 Alpha e abandonado, pois não existe arquivo 1.12.2 mais novo que eu tenha verificado.
-- FTB Quests está instalado, mas ainda sem capítulos/missões personalizadas.
-- Manifest e ZIP validados estruturalmente; não testados no launcher ou telefone. O conjunto de 60 mods pode ser pesado para o Galaxy A12.
+## Notas e limitações
+- Mods de Minecraft 1.12.2; não usar versões de outras versões do Minecraft.
+- Project Exploit 1.3.2 é Alpha/abandonado.
+- FTB Quests está instalado, ainda sem capítulos ou missões personalizadas.
+- “Zapia No Shaderpacks” e “FoamFix Core 7.7.4” não foram encontrados como mods públicos identificáveis para Forge 1.12.2.
+- ZIP validado estruturalmente, ainda não iniciado/testado no launcher ou aparelho.
