@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and package the CurseForge modpack without downloading mod JARs."""
+"""Static validation and CurseForge ZIP packaging for Mikael StoneBlock Lite."""
 from pathlib import Path
 import json, shutil, zipfile, tempfile
 
@@ -21,33 +21,46 @@ assert all(isinstance(x, int) and x > 0 for x in projects + file_ids)
 assert len(projects) == len(set(projects)), "projectID duplicado"
 assert len(file_ids) == len(set(file_ids)), "fileID duplicado"
 assert all(x.get("required") is True for x in files), "Entrada não obrigatória"
-assert (ROOT / "overrides").is_dir(), "Pasta overrides ausente"
+by_project = {x["projectID"]: x["fileID"] for x in files}
+assert by_project.get(282561) == 9131646, "StoneBlock Utilities atualizado ausente"
+assert by_project.get(302475) == 2722058, "Stone Crafting Table ausente"
+assert by_project.get(257655) == 2666967, "Void Island Control ausente"
+assert by_project.get(258911) == 2489010, "World Primer ausente"
+
+overrides = ROOT / "overrides"
+assert overrides.is_dir(), "Pasta overrides ausente"
+vic_cfg = (overrides / "config" / "voidislandcontrol.cfg").read_text(encoding="utf-8")
+stone_cfg = json.loads((overrides / "config" / "stoneblockutilities.json").read_text(encoding="utf-8"))
+structure = overrides / "config" / "voidislandcontrolstructures" / "island.nbt"
+assert "S:worldGenType=SUPERFLAT" in vic_cfg, "Tipo de mundo não é SUPERFLAT"
+assert "255*minecraft:stone,minecraft:lava" in vic_cfg, "Camadas de pedra/lava não encontradas"
+assert "S:islandMainSpawnType=island" in vic_cfg, "Ilha inicial customizada ausente"
+assert "island" in vic_cfg and structure.is_file() and structure.stat().st_size > 0, "Estrutura inicial ausente"
+assert stone_cfg.get("handDrops"), "Drops de pedra/pebbles não configurados"
+assert stone_cfg.get("crookDrops"), "Drops do crook não configurados"
 
 warnings = []
 with tempfile.TemporaryDirectory() as td:
     stage = Path(td) / "pack"
     stage.mkdir()
     shutil.copy2(MANIFEST, stage / "manifest.json")
-    shutil.copytree(ROOT / "overrides", stage / "overrides", dirs_exist_ok=True)
+    shutil.copytree(overrides, stage / "overrides", dirs_exist_ok=True)
 
     quest_dir = stage / "overrides" / "config" / "ftbquests"
     if not quest_dir.exists():
-        # Recover the quest config from the previous tracked package, if present.
         archives = sorted(ROOT.glob("Mikael-StoneBlock-Lite-*.zip"),
                           key=lambda p: p.stat().st_size, reverse=True)
         recovered = False
         for archive in archives:
             try:
                 with zipfile.ZipFile(archive) as zf:
-                    names = zf.namelist()
-                    matches = [n for n in names if
+                    matches = [n for n in zf.namelist() if
                                n.replace("\\\\", "/").startswith(
                                    ("overrides/config/ftbquests/", "config/ftbquests/"))]
-                    if not matches:
-                        continue
                     for name in matches:
                         normalized = name.replace("\\\\", "/")
-                        marker = "overrides/config/ftbquests/" if normalized.startswith("overrides/config/ftbquests/") else "config/ftbquests/"
+                        marker = ("overrides/config/ftbquests/" if normalized.startswith(
+                            "overrides/config/ftbquests/") else "config/ftbquests/")
                         relative = normalized.split(marker, 1)[1]
                         if not relative or ".." in Path(relative).parts:
                             continue
@@ -59,12 +72,12 @@ with tempfile.TemporaryDirectory() as td:
                             target.write_bytes(zf.read(name))
                     recovered = quest_dir.exists() and any(quest_dir.rglob("*"))
                     if recovered:
-                        warnings.append(f"Config FTB Quests recuperada de {archive.name}; valide as missões no jogo.")
+                        warnings.append(f"Config FTB Quests recuperada de {archive.name}; validar as missões no jogo.")
                         break
             except (zipfile.BadZipFile, OSError, KeyError) as exc:
                 warnings.append(f"Não foi possível ler {archive.name}: {exc}")
         if not recovered:
-            warnings.append("Config FTB Quests não encontrada no pacote atual nem nos ZIPs antigos; não afirmar que as 500 missões estão incluídas.")
+            warnings.append("Config FTB Quests não encontrada; não afirmar que as 500 missões estão incluídas.")
 
     report = [
         f"Modpack: {data.get('name')}",
@@ -74,9 +87,12 @@ with tempfile.TemporaryDirectory() as td:
         f"Entradas CurseForge: {len(files)}",
         f"Project IDs únicos: {len(set(projects))}",
         f"File IDs únicos: {len(set(file_ids))}",
+        "StoneBlock Utilities: 2.2.0 Beta (file 9131646)",
+        "Stone Crafting Table: 1.0.3 (file 2722058)",
+        "World generation: Void Island Control SUPERFLAT, 255 camadas de pedra + lava",
+        f"Estrutura de ilha customizada: {'presente' if structure.exists() else 'ausente'}",
         f"Config FTB Quests presente: {'sim' if quest_dir.exists() else 'não'}",
-        "Observação: os JARs são baixados pelo launcher compatível com o manifesto CurseForge.",
-        "Este pacote não comprova inicialização bem-sucedida do jogo."
+        "Validação estática; não comprova inicialização real do Minecraft."
     ] + ["AVISO: " + w for w in warnings]
     (stage / "BUILD-REPORT.txt").write_text("\n".join(report) + "\n", encoding="utf-8")
 
