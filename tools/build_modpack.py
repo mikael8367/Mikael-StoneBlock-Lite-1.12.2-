@@ -310,12 +310,11 @@ assert 257655 not in by_project, "Versão original do Void Island Control ainda 
 assert by_project.get(258911) == 2866063, "World Primer 0.6.0-dev.20200122.211517 ausente; não usar 0.5.0"
 assert by_project.get(238222) == 8752694, "JEI deve usar 4.16.5.1030 Release"
 assert 32274 not in by_project, "JourneyMap foi solicitado para remoção"
+overrides = ROOT / "overrides"
 optionsof_path = overrides / "optionsof.txt"
 optionsof_text = optionsof_path.read_text(encoding="utf-8")
 for option in ("ofFastRender:false", "ofRenderRegions:false", "ofSmoothWorld:false"):
     assert option in optionsof_text, f"Opção OptiFine segura ausente: {option}"
-
-overrides = ROOT / "overrides"
 assert overrides.is_dir(), "Pasta overrides ausente"
 vic_path = overrides / "config" / "voidislandcontrol.cfg"
 stone_path = overrides / "config" / "stoneblockutilities.json"
