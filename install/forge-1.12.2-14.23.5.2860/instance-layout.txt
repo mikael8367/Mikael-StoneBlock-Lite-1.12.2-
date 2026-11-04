@@ -1,0 +1,15 @@
+Estrutura de referência da instância (sem mods):
+
+.minecraft/
+  versions/
+    1.12.2-forge-14.23.5.2860/   [gerado pelo instalador/launcher]
+  libraries/
+    net/minecraftforge/forge/
+      1.12.2-14.23.5.2860/       [baixado pelo instalador/launcher]
+  mods/                           [deixar vazia por enquanto]
+  config/
+  resourcepacks/
+  shaderpacks/
+
+Importante: o nome exato do perfil e a organização de libraries podem variar conforme o launcher.
+Não crie JARs ou JSONs vazios para simular uma instalação.
