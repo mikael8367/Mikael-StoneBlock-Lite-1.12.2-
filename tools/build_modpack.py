@@ -135,11 +135,15 @@ def validate_world_config(config_text, stone_config, manifest_projects):
     inventory_match = re.search(r"S:startingItems\s*<([\s\S]*?)>", config_text)
     assert inventory_match, "Lista startingItems ausente"
     starting_items = [line.strip() for line in inventory_match.group(1).splitlines() if line.strip()]
-    assert not any(item.lower().startswith("bqt:") for item in starting_items), (
-        "Item Better Questing Triggerer órfão: BQT não está no manifesto"
-    )
+    assert len(starting_items) == 36, f"Inventário inicial precisa ter exatamente 36 slots; encontrados: {len(starting_items)}"
+    for item in starting_items:
+        item_match = re.fullmatch(r"([a-z0-9_.-]+:[a-z0-9_./-]+):(\\d+)\\*(\\d+)", item)
+        assert item_match, f"Entrada startingItems inválida: {item}"
+        assert item_match.group(1) == "minecraft:stone" and int(item_match.group(3)) == 0, (
+            f"Slot inicial deve ser vazio e usar item vanilla válido: {item}"
+        )
     assert 250193 not in manifest_projects and 238856 not in manifest_projects, (
-        "Rever a validação do item BQT: Better Questing pode ter sido adicionado"
+        "O modpack não deve depender do Better Questing Triggerer nem Better Questing"
     )
 
     assert isinstance(stone_config, dict)
@@ -281,12 +285,12 @@ with tempfile.TemporaryDirectory() as td:
         f"Entradas CurseForge: {len(files)}",
         f"Project IDs únicos: {len(set(projects))}",
         f"File IDs únicos: {len(set(file_ids))}",
-        "World type: Void? World (seleção manual no single-player)",
+        "World type: Void? World (pré-seleção do single-player deve ser conferida)",
         "Superflat: versão 3, 256 camadas; pedra + lava",
         f"Custom island: {structure_info['size']} / {structure_info['blocks']} blocos",
         f"NBT: DataVersion 1343; {structure_info['stone']} pedra; {structure_info['air']} ar",
         f"Spawn marker: {structure_info['spawn_marker']} -> offset {structure_info['spawn_offset']}",
-        "Starting inventory: sem referência órfã Better Questing (bqt)",
+        "Starting inventory: 36 slots válidos, vazios (minecraft:stone x0)",
         f"Config FTB Quests presente: {'sim' if quest_dir.exists() else 'não'}",
         "Validação estática; não comprova inicialização real do Minecraft."
     ] + ["AVISO: " + w for w in warnings]
