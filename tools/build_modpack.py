@@ -337,7 +337,7 @@ with tempfile.TemporaryDirectory() as td:
     quest_dir = stage / "overrides" / "config" / "ftbquests"
     if not quest_dir.exists():
         def archive_version_key(path):
-            match = re.search(r"-(\\d+(?:\\.\\d+)+)\\.zip$", path.name)
+            match = re.search(r"-(\d+(?:\.\d+)+)\.zip$", path.name)
             return tuple(int(part) for part in match.group(1).split(".")) if match else (-1,)
 
         archives = sorted(ROOT.glob("Mikael-StoneBlock-Lite-*.zip"),
@@ -413,5 +413,17 @@ with tempfile.TemporaryDirectory() as td:
         for path in sorted(stage.rglob("*")):
             if path.is_file():
                 zf.write(path, path.relative_to(stage).as_posix())
+    with zipfile.ZipFile(output, "r") as verify_zip:
+        bad_member = verify_zip.testzip()
+        assert bad_member is None, f"ZIP final com CRC inválido: {bad_member}"
+        names = verify_zip.namelist()
+        assert len(names) == len(set(names)), "ZIP final contém caminhos duplicados"
+        for name in names:
+            normalized = name.replace("\\", "/")
+            parts = Path(normalized).parts
+            assert not Path(normalized).is_absolute() and ".." not in parts, (
+                f"Caminho inseguro no ZIP final: {name}"
+            )
+        assert "overrides/optionsof.txt" in names, "optionsof.txt ausente no ZIP final"
     print("\n".join(report))
-    print(f"Pacote criado: {output}")
+    print(f"Pacote criado e validado: {output}")
