@@ -1,0 +1,10 @@
+IDIOMA DO MODPACK — PORTUGUÊS (BRASIL)
+
+O Minecraft Java 1.12.2 já inclui o idioma Português (Brasil).
+
+Para ativar:
+1. Abra o Minecraft.
+2. Entre em Options (Opções) > Language (Idioma).
+3. Selecione Português (Brasil) e confirme.
+
+Observação: isso traduz o jogo base e os mods que já possuem arquivos pt_BR. Não encontrei um pacote de tradução geral compatível com Minecraft 1.12.2 para adicionar com segurança. Pacotes de tradução destinados a versões mais novas não devem ser instalados nesta instância.
