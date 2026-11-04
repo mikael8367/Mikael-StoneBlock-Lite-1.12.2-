@@ -311,11 +311,11 @@ assert by_project.get(258911) == 2866063, "World Primer 0.6.0-dev.20200122.21151
 assert by_project.get(238222) == 8752694, "JEI deve usar 4.16.5.1030 Release"
 assert 32274 not in by_project, "JourneyMap foi solicitado para remoção"
 overrides = ROOT / "overrides"
+assert overrides.is_dir(), "Pasta overrides ausente"
 optionsof_path = overrides / "optionsof.txt"
 optionsof_text = optionsof_path.read_text(encoding="utf-8")
 for option in ("ofFastRender:false", "ofRenderRegions:false", "ofSmoothWorld:false"):
     assert option in optionsof_text, f"Opção OptiFine segura ausente: {option}"
-assert overrides.is_dir(), "Pasta overrides ausente"
 vic_path = overrides / "config" / "voidislandcontrol.cfg"
 stone_path = overrides / "config" / "stoneblockutilities.json"
 structure_path = overrides / "config" / "voidislandcontrolstructures" / "island.nbt"
@@ -373,6 +373,10 @@ with tempfile.TemporaryDirectory() as td:
                     recovered = quest_dir.exists() and any(quest_dir.rglob("*"))
                     if recovered:
                         quest_file_count = sum(1 for p in quest_dir.rglob("*") if p.is_file())
+                        assert quest_file_count >= 500, (
+                            f"Config FTB Quests incompleta em {archive.name}: "
+                            f"{quest_file_count} arquivos (mínimo esperado: 500)"
+                        )
                         warnings.append(f"Config FTB Quests recuperada de {archive.name} ({quest_file_count} arquivos); validar missões no jogo.")
                         break
             except (zipfile.BadZipFile, OSError, KeyError) as exc:
