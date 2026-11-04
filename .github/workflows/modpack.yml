@@ -33,10 +33,3 @@ jobs:
           path: dist/*.zip
           if-no-files-found: error
           retention-days: 30
-      - name: Publicar relatório
-        uses: actions/upload-artifact@v4
-        with:
-          name: relatorio-build-${{ github.sha }}
-          path: dist/../BUILD-REPORT.txt
-          if-no-files-found: ignore
-          retention-days: 30
