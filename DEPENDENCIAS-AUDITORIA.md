@@ -57,3 +57,10 @@ A auditoria dedicada de geração de mundo está em `WORLDGEN-AUDITORIA.md`. A r
 ## Auditoria de estabilidade e crash 0.5.16
 
 A análise de tela de criação, crashes de entrada/saída, configuração antiga do StoneBlock Utilities e histórico do Void Island Control está em `WORLDGEN-AUDITORIA.md`.
+
+
+## Estabilidade 0.5.17
+- Substituído Void Island Control original (project 257655 / file 2666967) por Void Island Control Remastered 1.5.5 (project 1709173 / file 8980529).
+- Forge 14.23.5.2860 mantido; atende ao mínimo >=14.23.5.2856 declarado pelo remaster e ao requisito 2860+ do SBU 2.2.0.
+- `resetInventory=false` evita limpeza automática do inventário durante criação/recuperação de ilha.
+- O changelog do remaster 1.5.5 registra a correção do crash de criação de mundo #2 da versão 1.5.4.
