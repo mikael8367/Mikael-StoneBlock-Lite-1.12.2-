@@ -1,12 +1,14 @@
-# Mikael StoneBlock Lite 0.5.13
+# Mikael StoneBlock Lite 0.5.14
 
 - Minecraft Java 1.12.2
 - Forge 14.23.5.2860
-- 65 referências CurseForge no manifesto
-- 65 Project IDs únicos e 65 File IDs únicos na última validação estática
-- Dependências adicionais registradas: Placebo e ConnectedTexturesMod (CTM)
-- FTB Library, FTB Utilities, FTB Quests e FTB Backups constam no manifesto
-- Mods são baixados pelo launcher compatível com o manifesto CurseForge; os JARs não estão versionados neste repositório
-- A configuração FTB Quests é recuperada automaticamente de um ZIP antigo durante o build, caso esteja presente nesse arquivo
-- A contagem de 500 missões e a inicialização do conjunto completo ainda precisam de confirmação em jogo
+- 66 referências CurseForge no manifesto
+- StoneBlock Utilities 2.2.0 Beta — bancada de trabalho de pedra, crook e correções para Ex Compressum/Void Island Control
+- Stone Crafting Table 1.0.3 — bancada de pedra separada
+- Void Island Control — mundo SUPERFLAT com camadas de pedra e ilha inicial customizada
+- World Primer — mantido no manifesto
+- Placebo e ConnectedTexturesMod (CTM) presentes como dependências
+- FTB Library, FTB Utilities, FTB Quests e FTB Backups no manifesto
+- JARs baixados por launcher compatível com CurseForge; não versionados neste repositório
+- Configuração FTB Quests recuperada de ZIP antigo durante o build, quando disponível; quantidade de missões ainda precisa ser validada em jogo
 - OptiFine não incluído
