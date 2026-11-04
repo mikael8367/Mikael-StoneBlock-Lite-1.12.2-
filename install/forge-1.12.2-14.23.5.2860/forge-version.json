@@ -1,0 +1,10 @@
+{
+  "minecraft_version": "1.12.2",
+  "forge_version": "14.23.5.2860",
+  "java_runtime": "Java 8 64-bit",
+  "installer_url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.12.2-14.23.5.2860/forge-1.12.2-14.23.5.2860-installer.jar",
+  "installer_sha1": "5e8a91f71ef3d1f77de3f8d3261aedcc2f551c9d",
+  "installer_binary_in_repository": false,
+  "mods_in_this_directory": false,
+  "note": "O instalador binário não foi adicionado. Use o instalador oficial e deixe o launcher gerar as bibliotecas e o perfil."
+}
