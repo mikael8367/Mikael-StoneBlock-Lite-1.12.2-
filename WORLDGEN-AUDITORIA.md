@@ -57,3 +57,22 @@ Não apague saves. Faça cópia antes de testar qualquer alteração.
 ## Limites
 
 O validador verifica arquivos e metadados. Não clica na tela do Minecraft, não carrega Forge, não gera chunks reais e não reproduz a saída para o menu. Para fechar a investigação de um crash real, é necessário o `latest.log` ou arquivo em `crash-reports` obtido no launcher Android.
+
+
+## Atualização de estabilidade 0.5.17
+
+### Tela Criar Mundo
+O manifesto substitui o Void Island Control original 1.5.3 pelo Void Island Control Remastered 1.5.5 (project 1709173 / file 8980529). O remaster adiciona fallback para localizar o campo de seleção de tipo de mundo quando a GUI altera a reflexão e o changelog da versão 1.5.5 declara a correção do crash de criação de mundo reportado no issue #2 da 1.5.4.
+
+Fontes:
+- [Código do remaster](https://github.com/kreezxil/VoidIslandControl/blob/master/src/main/java/com/bartz24/voidislandcontrol/EventHandler.java)
+- [Issue #2](https://github.com/kreezxil/VoidIslandControl/issues/2)
+- [Arquivo 1.5.5 e changelog](https://www.curseforge.com/minecraft/mc-mods/void-island-control-remastered/files/8980529)
+
+O Forge 14.23.5.2860 foi mantido; o remaster declara suporte a 14.23.5.2856 ou superior. StoneBlock Utilities 2.2.0 requer Forge 2860 ou superior em servidores.
+
+### Preservação de inventário
+`resetInventory=false` evita a limpeza automática do inventário durante criação ou recuperação de ilha. Jogadores novos continuam começando naturalmente sem itens. O array `startingItems` mantém 36 entradas válidas; a rotina não o percorre enquanto resetInventory estiver desativado.
+
+### Limites
+A substituição corrige um defeito conhecido do mod na tela de criação e melhora a tolerância à reflexão. Não comprova ausência de travamentos causados por outros mods, pressão de memória Android, drivers gráficos ou geração de chunks. O teste definitivo exige abrir o Minecraft e obter `latest.log` se houver falha.
