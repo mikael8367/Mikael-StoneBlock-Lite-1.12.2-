@@ -1,0 +1,42 @@
+name: Validar e empacotar modpack
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'manifest.json'
+      - 'overrides/**'
+      - 'Mikael-StoneBlock-Lite-*.zip'
+      - 'tools/**'
+      - '.github/workflows/modpack.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validar e gerar ZIP
+        run: python tools/build_modpack.py
+      - name: Publicar pacote como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mikael-StoneBlock-Lite-${{ github.sha }}
+          path: dist/*.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publicar relatório
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-build-${{ github.sha }}
+          path: dist/../BUILD-REPORT.txt
+          if-no-files-found: ignore
+          retention-days: 30
