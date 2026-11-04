@@ -4,6 +4,7 @@ from pathlib import Path
 import gzip
 import io
 import json
+import math
 import re
 import shutil
 import struct
@@ -121,6 +122,8 @@ def validate_world_config(config_text, stone_config, manifest_projects):
     assert total_layers == 256, f"Preset tem {total_layers} camadas, esperado 256"
 
     assert int(config_value(config_text, "baseDimension", "I")) == 0
+    assert config_value(config_text, "netherVoid", "B").lower() == "false"
+    assert config_value(config_text, "endVoid", "B").lower() == "false"
     assert config_value(config_text, "islandMainSpawnType") == "island"
     assert config_value(config_text, "islandSpawnType") == "island"
     assert config_value(config_text, "islandYLevel", "I") == "88"
@@ -146,9 +149,74 @@ def validate_world_config(config_text, stone_config, manifest_projects):
         "O modpack não deve depender do Better Questing Triggerer nem Better Questing"
     )
 
-    assert isinstance(stone_config, dict)
-    assert stone_config.get("handDrops"), "Drops de pedra/pebbles não configurados"
-    assert stone_config.get("crookDrops"), "Drops do crook não configurados"
+    validate_sbu_config(stone_config, manifest_projects)
+
+
+def parse_registry_reference(value, label):
+    assert isinstance(value, str), f"{label} deve ser texto"
+    parts = value.split(":")
+    assert len(parts) == 3, f"{label} inválido: {value}"
+    namespace, name, metadata = parts
+    assert re.fullmatch(r"[a-z0-9_.-]+", namespace), f"Namespace inválido em {label}: {value}"
+    assert re.fullmatch(r"[a-z0-9_./-]+", name), f"ID inválido em {label}: {value}"
+    assert metadata.isdigit(), f"Metadata inválida em {label}: {value}"
+    return namespace, name, int(metadata)
+
+
+def validate_sbu_config(config, manifest_projects):
+    # StoneBlock Utilities 2.2.0 changed this schema. Older configs can crash
+    # during startup because the current parser iterates handDrops/crookDrops.
+    assert isinstance(config, dict), "Config StoneBlock Utilities não é um objeto JSON"
+    assert isinstance(config.get("active_render"), bool), "active_render ausente ou inválido"
+    hand = config.get("handDrops")
+    crook = config.get("crookDrops")
+    assert isinstance(hand, list) and hand, "handDrops ausente; possível config antiga do SBU"
+    assert isinstance(crook, list) and crook, "crookDrops ausente; possível config antiga do SBU"
+
+    for index, entry in enumerate(hand):
+        assert isinstance(entry, dict), f"handDrops[{index}] inválido"
+        block_ns, block_name, block_meta = parse_registry_reference(entry.get("block"), f"handDrops[{index}].block")
+        drop_ns, drop_name, drop_meta = parse_registry_reference(entry.get("drop"), f"handDrops[{index}].drop")
+        assert block_ns == "minecraft" and block_name == "stone" and block_meta == 0, (
+            f"Drop de mão deve referenciar pedra vanilla: handDrops[{index}]"
+        )
+        assert drop_ns == "exnihilocreatio" and drop_name == "item_pebble", (
+            f"Drop de pedra inesperado: handDrops[{index}].drop"
+        )
+        assert 274456 in manifest_projects, "Ex Nihilo Creatio ausente, mas o drop de pebble depende dele"
+        for key in ("drop_with", "drop_without"):
+            assert isinstance(entry.get(key), int) and entry[key] >= 0, f"{key} inválido em handDrops[{index}]"
+        assert isinstance(entry.get("chance"), int) and 0 <= entry["chance"] <= 100, (
+            f"chance fora de 0..100 em handDrops[{index}]"
+        )
+        speed = entry.get("speed")
+        assert isinstance(speed, (int, float)) and math.isfinite(speed) and 0 < speed <= 100, (
+            f"speed inválido em handDrops[{index}]"
+        )
+
+    for index, entry in enumerate(crook):
+        assert isinstance(entry, dict), f"crookDrops[{index}] inválido"
+        block_ns, block_name, block_meta = parse_registry_reference(entry.get("block"), f"crookDrops[{index}].block")
+        assert block_ns == "minecraft" and block_name == "dirt" and block_meta == 0, (
+            f"Drop de crook deve referenciar dirt vanilla: crookDrops[{index}]"
+        )
+        assert isinstance(entry.get("randomDrop"), bool), f"randomDrop inválido em crookDrops[{index}]"
+        amount = entry.get("randomDropAmount")
+        drops = entry.get("drops")
+        assert isinstance(amount, int) and amount >= 1, f"randomDropAmount inválido em crookDrops[{index}]"
+        assert isinstance(drops, list) and drops, f"Lista drops vazia em crookDrops[{index}]"
+        assert amount <= len(drops), f"randomDropAmount maior que a lista em crookDrops[{index}]"
+        for drop_index, drop in enumerate(drops):
+            assert isinstance(drop, dict), f"crookDrops[{index}].drops[{drop_index}] inválido"
+            ns, name, meta = parse_registry_reference(
+                drop.get("drop"), f"crookDrops[{index}].drops[{drop_index}].drop"
+            )
+            assert ns == "minecraft" and name == "sapling" and 0 <= meta <= 5, (
+                f"Drop de crook fora da lista de mudas vanilla: {drop}"
+            )
+            assert isinstance(drop.get("drop_size"), int) and drop["drop_size"] >= 1, (
+                f"drop_size inválido em crookDrops[{index}].drops[{drop_index}]"
+            )
 
 
 def validate_structure(path, island_y):
@@ -168,6 +236,7 @@ def validate_structure(path, island_y):
     assert "minecraft:structure_block" in names, "Estrutura sem bloco de dados de spawn"
 
     block_by_pos = {}
+    seen_positions = set()
     markers = []
     counts = {}
     for entry in blocks:
@@ -181,12 +250,17 @@ def validate_structure(path, island_y):
             f"Índice de palette inválido em {pos}"
         )
         state_name = names[state_index]
-        block_by_pos[tuple(pos)] = state_name
+        position = tuple(pos)
+        assert position not in seen_positions, f"Posição NBT duplicada: {position}"
+        seen_positions.add(position)
+        block_by_pos[position] = state_name
         counts[state_name] = counts.get(state_name, 0) + 1
         tile = entry.get("nbt", {})
         if state_name == "minecraft:structure_block" and tile.get("mode") == "DATA" and tile.get("metadata") == "spawn_point":
             markers.append(tuple(pos))
 
+    assert len(seen_positions) == len(blocks), "A estrutura contém posições duplicadas"
+    assert len(seen_positions) == size[0] * size[1] * size[2], "A estrutura não contém todos os blocos do volume 11x11x11"
     assert len(markers) == 1, f"Esperado exatamente 1 marcador spawn_point; encontrados: {len(markers)}"
     sx, sy, sz = markers[0]
     origin = (-(size[0] // 2), 0, -(size[2] // 2))
@@ -236,6 +310,10 @@ structure_path = overrides / "config" / "voidislandcontrolstructures" / "island.
 vic_cfg = vic_path.read_text(encoding="utf-8")
 stone_cfg = json.loads(stone_path.read_text(encoding="utf-8"))
 validate_world_config(vic_cfg, stone_cfg, set(projects))
+server_properties = (ROOT / "overrides" / "server.properties").read_text(encoding="utf-8")
+assert re.search(r"^level-type=voidworld\\s*$", server_properties, re.M), (
+    "server.properties precisa usar level-type=voidworld para servidores dedicados"
+)
 structure_info = validate_structure(structure_path, int(config_value(vic_cfg, "islandYLevel", "I")))
 
 warnings = []
@@ -291,6 +369,9 @@ with tempfile.TemporaryDirectory() as td:
         f"NBT: DataVersion 1343; {structure_info['stone']} pedra; {structure_info['air']} ar",
         f"Spawn marker: {structure_info['spawn_marker']} -> offset {structure_info['spawn_offset']}",
         "Starting inventory: 36 slots válidos, vazios (minecraft:stone x0)",
+        "StoneBlock Utilities config: schema 2.2.0 validado",
+        "Nether/End: providers vanilla preservados (overrides void desativados)",
+        "Server level-type: voidworld",
         f"Config FTB Quests presente: {'sim' if quest_dir.exists() else 'não'}",
         "Validação estática; não comprova inicialização real do Minecraft."
     ] + ["AVISO: " + w for w in warnings]
