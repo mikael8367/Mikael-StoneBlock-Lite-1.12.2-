@@ -292,9 +292,9 @@ assert data.get("manifestVersion") == 1
 assert data.get("minecraft", {}).get("version") == "1.12.2"
 loaders = data.get("minecraft", {}).get("modLoaders", [])
 assert any(x.get("id") == "forge-14.23.5.2860" and x.get("primary") for x in loaders)
-    forge_id = next(x["id"] for x in loaders if x.get("primary"))
-    forge_parts = tuple(int(part) for part in forge_id.removeprefix("forge-").split("."))
-    assert forge_parts >= (14, 23, 5, 2856), "Forge abaixo do mínimo suportado pelo VIC Remastered"
+forge_id = next(x["id"] for x in loaders if x.get("primary"))
+forge_parts = tuple(int(part) for part in forge_id.removeprefix("forge-").split("."))
+assert forge_parts >= (14, 23, 5, 2856), "Forge abaixo do mínimo suportado pelo VIC Remastered"
 files = data.get("files", [])
 projects = [x.get("projectID") for x in files]
 file_ids = [x.get("fileID") for x in files]
@@ -305,8 +305,8 @@ assert all(x.get("required") is True for x in files), "Entrada não obrigatória
 by_project = {x["projectID"]: x["fileID"] for x in files}
 assert by_project.get(282561) == 9131646, "StoneBlock Utilities atualizado ausente"
 assert by_project.get(302475) == 2722058, "Stone Crafting Table ausente"
-    assert by_project.get(1709173) == 8980529, "Void Island Control Remastered 1.5.5 ausente"
-    assert 257655 not in by_project, "Versão original do Void Island Control ainda está no manifesto"
+assert by_project.get(1709173) == 8980529, "Void Island Control Remastered 1.5.5 ausente"
+assert 257655 not in by_project, "Versão original do Void Island Control ainda está no manifesto"
 assert by_project.get(258911) == 2489010, "World Primer ausente"
 
 overrides = ROOT / "overrides"
