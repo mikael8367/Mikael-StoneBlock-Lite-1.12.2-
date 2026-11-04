@@ -54,6 +54,14 @@ Forge: 14.23.5.2860
 
 Nenhum `projectID` ou `fileID` repetido foi encontrado no manifesto após a atualização. Mods diferentes da mesma família (por exemplo, módulos separados de Mekanism) foram mantidos porque não são duplicatas.
 
+## Empacotamento automatizado 0.5.13
+
+- GitHub Actions executou a validação e o empacotamento com sucesso.
+- Artefato ZIP gerado: `Mikael-StoneBlock-Lite-0.5.13.zip`.
+- A configuração FTB Quests foi recuperada do arquivo antigo `Mikael-StoneBlock-Lite-0.5.7.zip` e incluída no pacote gerado.
+- O log do build confirmou a presença da pasta de configuração, mas não contou nem validou individualmente as 500 missões.
+- O pacote contém manifesto e overrides; os JARs continuam sendo baixados por um launcher compatível com CurseForge.
+
 ## Limites
 
 A verificação cobre os metadados de dependência publicados pelo CurseForge para os arquivos listados. Ela não substitui um teste de inicialização real no launcher nem garante ausência de incompatibilidades entre mods.
