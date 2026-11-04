@@ -137,7 +137,7 @@ def validate_world_config(config_text, stone_config, manifest_projects):
     starting_items = [line.strip() for line in inventory_match.group(1).splitlines() if line.strip()]
     assert len(starting_items) == 36, f"Inventário inicial precisa ter exatamente 36 slots; encontrados: {len(starting_items)}"
     for item in starting_items:
-        item_match = re.fullmatch(r"([a-z0-9_.-]+:[a-z0-9_./-]+):(\\d+)\\*(\\d+)", item)
+        item_match = re.fullmatch(r"([a-z0-9_.-]+:[a-z0-9_./-]+):(\d+)\*(\d+)", item)
         assert item_match, f"Entrada startingItems inválida: {item}"
         assert item_match.group(1) == "minecraft:stone" and int(item_match.group(3)) == 0, (
             f"Slot inicial deve ser vazio e usar item vanilla válido: {item}"
