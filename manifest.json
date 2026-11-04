@@ -11,12 +11,12 @@
   "manifestType": "minecraftModpack",
   "manifestVersion": 1,
   "name": "Mikael StoneBlock Lite",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "author": "Mikael8367",
   "files": [
     {
       "projectID": 282561,
-      "fileID": 2706845,
+      "fileID": 9131646,
       "required": true
     },
     {
@@ -337,6 +337,11 @@
     {
       "projectID": 267602,
       "fileID": 2915363,
+      "required": true
+    },
+    {
+      "projectID": 302475,
+      "fileID": 2722058,
       "required": true
     }
   ],
