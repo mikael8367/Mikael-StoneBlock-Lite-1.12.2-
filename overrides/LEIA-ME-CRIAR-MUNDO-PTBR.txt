@@ -1,0 +1,23 @@
+GUIA DE CRIAÇÃO DO MUNDO — MIKAEL STONEBLOCK LITE 1.12.2
+
+1. Abra Singleplayer (Um jogador).
+2. Escolha Criar novo mundo.
+3. Abra as opções de tipo de mundo (World Type).
+4. Selecione exatamente "Void? World".
+5. Crie o mundo normalmente.
+
+IMPORTANTE
+- Não deixe em "Default/Padrão".
+- Não selecione o "Superflat" vanilla. O preset de pedra é aplicado pelo tipo especial "Void? World" do Void Island Control.
+- Na primeira entrada, o mod cria a ilha central e, com autoCreate ativado, também cria a ilha pessoal do jogador. Você será levado para a ilha pessoal.
+- A ilha usa a estrutura customizada "island", armazenada em config/voidislandcontrolstructures/island.nbt.
+- Não altere nem remova a estrutura NBT ou a lista customIslands sem atualizar a auditoria.
+
+Se o mundo aparecer com terreno normal:
+1. Feche o mundo.
+2. Crie outro mundo e confirme "Void? World" antes de clicar em Criar.
+3. Não reutilize um save criado com o tipo de mundo errado.
+
+Se houver crash:
+- Não apague o save.
+- Guarde logs/latest.log e a pasta crash-reports do perfil do launcher para análise.
