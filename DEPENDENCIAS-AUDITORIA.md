@@ -52,3 +52,8 @@ O workflow valida:
 ## Revisão de criação de mundo 0.5.15
 
 A auditoria dedicada de geração de mundo está em `WORLDGEN-AUDITORIA.md`. A revisão removeu a referência órfã `bqt:bqt:0*1` do inventário inicial e adicionou verificações do preset superflat e do NBT da ilha customizada ao build.
+
+
+## Auditoria de estabilidade e crash 0.5.16
+
+A análise de tela de criação, crashes de entrada/saída, configuração antiga do StoneBlock Utilities e histórico do Void Island Control está em `WORLDGEN-AUDITORIA.md`.
