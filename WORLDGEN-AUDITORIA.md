@@ -12,7 +12,7 @@ A revisão encontrou e corrigiu uma referência de item inicial órfã e fortale
 
 A configuração antiga continha bqt:bqt:0*1 em startingItems. O manifesto não contém Better Questing Triggerer (projectID 250193) nem Better Questing (projectID 238856), requisito do Triggerer. O item não podia ser resolvido pelo comando de item do Minecraft. O método de inventário inicial do Void Island Control captura essa falha, limpa o inventário e exibe um erro.
 
-A referência foi removida, preservando os espaços vazios restantes da lista de inventário inicial. Não adicionamos Better Questing: o modpack usa FTB Quests e não precisa de um segundo sistema de quests para corrigir esse problema.
+A referência foi substituída por 36 entradas válidas minecraft:stone:0*0. O item vanilla existe, mas a quantidade zero deixa os slots vazios; isso mantém o tamanho de inventário esperado pelo loop do mod. Não adicionamos Better Questing: o modpack usa FTB Quests e não precisa de um segundo sistema de quests.
 
 ## 2. Verificação do tipo de mundo
 
@@ -25,7 +25,7 @@ A referência foi removida, preservando os espaços vazios restantes da lista de
 - islandMainSpawnType=island e islandSpawnType=island.
 - A lista customIslands contém island.
 
-**Ação obrigatória na tela de criação:** no modo single-player, selecionar o tipo de mundo **Void? World**. O preset só é usado pelo gerador personalizado do Void Island Control. Deixar o tipo em Padrão ou escolher o Superflat vanilla não ativa essa lógica de ilhas.
+**Conferência na tela de criação:** no fluxo normal Singleplayer → seleção de mundos → Criar novo mundo, o evento do Void Island Control tenta pré-selecionar **Void? World**. Confirme que essa opção aparece selecionada antes de criar. O preset só é usado pelo gerador personalizado; Padrão e Superflat vanilla não ativam essa lógica de ilhas.
 
 ## 3. Verificação estrutural do island.nbt
 
@@ -65,3 +65,8 @@ A proteção de spawn está ligada e cobre uma área central de 500 blocos; a il
 - Empacotamento de manifest + overrides e recuperação condicional de FTB Quests.
 
 **Limite:** build aprovado significa que os arquivos passaram nessas verificações. Não comprova que Minecraft inicializa ou gera um mundo real sem crash; isso ainda precisa de teste no launcher e análise de latest.log.
+
+
+### Nota de implementação do inventário inicial
+
+O código do Void Island Control percorre pelo menos 36 posições do array startingItems. Por isso, o build agora exige exatamente 36 entradas parseáveis e verificáveis. Cada slot usa minecraft:stone com quantidade zero: item registrado no Minecraft base, sem entregar itens ao jogador.
