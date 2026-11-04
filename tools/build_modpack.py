@@ -307,7 +307,7 @@ assert by_project.get(282561) == 9131646, "StoneBlock Utilities atualizado ausen
 assert by_project.get(302475) == 2722058, "Stone Crafting Table ausente"
 assert by_project.get(1709173) == 8980529, "Void Island Control Remastered 1.5.5 ausente"
 assert 257655 not in by_project, "Versão original do Void Island Control ainda está no manifesto"
-assert by_project.get(258911) == 2489010, "World Primer ausente"
+assert by_project.get(258911) == 2866063, "World Primer 0.6.0-dev.20200122.211517 ausente; não usar 0.5.0"
 
 overrides = ROOT / "overrides"
 assert overrides.is_dir(), "Pasta overrides ausente"
@@ -379,6 +379,7 @@ with tempfile.TemporaryDirectory() as td:
         "Void Island Control Remastered: 1.5.5 (GUI fallback / crash fix)",
         "Inventory reset: disabled (preserva itens em recuperação)",
         "StoneBlock Utilities config: schema 2.2.0 validado",
+        "World Primer: 0.6.0-dev.20200122.211517 (Forge 1.12.2)",
         "Nether/End: providers vanilla preservados (overrides void desativados)",
         "Server level-type: voidworld",
         f"Config FTB Quests presente: {'sim' if quest_dir.exists() else 'não'}",
