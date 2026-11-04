@@ -1,67 +1,49 @@
-# Auditoria de dependências — Mikael StoneBlock Lite 1.12.2
+# Auditoria técnica — Mikael StoneBlock Lite 1.12.2
 
-Versão auditada: 0.5.13  
+Versão: 0.5.14  
 Minecraft: 1.12.2  
 Forge: 14.23.5.2860
 
-## Resultado da auditoria
+## Atualizações desta revisão
 
-- 65 entradas no manifesto.
-- Nenhum `projectID` duplicado.
-- Nenhum `fileID` duplicado.
-- Todas as relações marcadas como `RequiredDependency` encontradas nas páginas dos 63 arquivos originais foram comparadas com o manifesto.
-- Duas dependências obrigatórias ausentes foram adicionadas: Placebo e ConnectedTexturesMod (CTM).
-- Os dois arquivos adicionados foram conferidos individualmente e são releases para Minecraft 1.12.2.
-- As dependências obrigatórias identificadas já estão presentes ou foram adicionadas.
+- StoneBlock Utilities atualizado de fileID 2706845 (2.1.5) para fileID 9131646 (2.2.0 Beta), projeto 282561.
+- Stone Crafting Table adicionado: projectID 302475, fileID 2722058 (1.12.2 Forge).
+- Void Island Control (projectID 257655) e World Primer (projectID 258911) mantidos.
+- A versão 2.2.0 Beta do StoneBlock Utilities informa correções para crash do Ex Compressum ao processar alimentos com efeitos de poção em fake players, restauração/persistência de ilhas do Void Island Control e drops do crook.
+- Forge 14.23.5.2860 satisfaz o requisito mínimo informado de 14.23.5.2792 para o arquivo 2.2.0.
 
-## Dependências adicionadas nesta auditoria
+## Configuração do mundo verificada estaticamente
 
-| Dependência | CurseForge Project ID | File ID | Arquivo |
-|---|---:|---:|---|
-| Placebo | 283644 | 2537494 | Placebo-1.12.2-1.3.1.jar |
-| ConnectedTexturesMod (CTM) | 267602 | 2915363 | CTM-MC1.12.2-1.0.2.31.jar |
+- `worldGenType=SUPERFLAT`.
+- Preset contém `255*minecraft:stone,minecraft:lava`.
+- Ilha inicial configurada como estrutura customizada `island`.
+- `island.nbt` está presente no caminho de estruturas do Void Island Control.
+- `stoneblockutilities.json` contém regras de drops de pedra e crook.
 
-## Relações obrigatórias verificadas
+Isso confirma a configuração declarada nos arquivos, não a aparência final ou a geração real do mundo dentro do jogo.
 
-- StoneBlockUtilities → Shadowfacts' Forgelin
-- FTB Quests → FTB Library; Item Filters
-- Thermal Foundation → CoFH Core; CoFH World
-- Thermal Expansion → CodeChicken Lib; Thermal Foundation
-- Extreme Reactors → ZeroCore 2
-- Draconic Evolution → Brandon's Core; CodeChicken Lib; Redstone Flux
-- Mekanism Generators → Mekanism
-- Mekanism Tools → Mekanism
-- Mod dependente de Placebo (Project ID 288885) → Placebo
-- Game Stages → Bookshelf
-- Dependência de JEI (Project ID 240630) → Just Enough Items (JEI)
-- Builder's Bag - ProjectE Addon → Builder's Bag; ProjectE
-- Dependência Draconic (Project ID 314515) → Baubles; Brandon's Core; Draconic Evolution; Project Intelligence
-- FTB Utilities → FTB Library
-- ProjectEX → Mike's Mods Library; ProjectE
-- Thermal Cultivation → Thermal Foundation
-- Thermal Dynamics → CodeChicken Lib; Thermal Foundation
-- Thermal Innovation → Thermal Foundation
-- Chisel → ConnectedTexturesMod (CTM)
-- Botania → Baubles
+## Verificações do manifesto
 
-## Relações que não exigem adicionar outro mod
+O workflow valida:
+- JSON e formato CurseForge.
+- Minecraft 1.12.2 e Forge 14.23.5.2860.
+- IDs positivos, sem projectID/fileID duplicados.
+- Todas as entradas obrigatórias.
+- Presença e IDs esperados dos mods de mundo e bancada.
+- Configurações de mundo e StoneBlock Utilities.
+- Presença da estrutura inicial.
 
-- CoFH Lib aparece como `EmbeddedLibrary` na relação de CoFH Core; não foi adicionada como JAR separado.
-- JourneyMap Tools aparece como `Tool`, não como dependência obrigatória de execução.
-- Relações `OptionalDependency` foram preservadas como opcionais; não foram convertidas em dependências obrigatórias.
+## Limites e riscos ainda abertos
 
-## Duplicatas
+- StoneBlock Utilities 2.2.0 é Beta, não Release estável. Foi escolhido porque contém correções relevantes para os mods que já estão no pack; ainda exige teste real.
+- Stone Crafting Table adiciona uma bancada distinta da bancada de trabalho do StoneBlock Utilities. São dois mods diferentes; verificar receitas e registro de blocos em jogo.
+- A pasta FTB Quests é recuperada de um ZIP antigo no build. O número e a integridade das missões não são confirmados automaticamente.
+- Nenhum workflow estático consegue provar que os 66 mods iniciam juntos. É necessário obter `latest.log` ou `crash-reports` de uma execução real.
+- Os JARs são baixados pelo launcher compatível com CurseForge; não estão armazenados neste repositório.
 
-Nenhum `projectID` ou `fileID` repetido foi encontrado no manifesto após a atualização. Mods diferentes da mesma família (por exemplo, módulos separados de Mekanism) foram mantidos porque não são duplicatas.
+## Referências CurseForge
 
-## Empacotamento automatizado 0.5.13
-
-- GitHub Actions executou a validação e o empacotamento com sucesso.
-- Artefato ZIP gerado: `Mikael-StoneBlock-Lite-0.5.13.zip`.
-- A configuração FTB Quests foi recuperada do arquivo antigo `Mikael-StoneBlock-Lite-0.5.7.zip` e incluída no pacote gerado.
-- O log do build confirmou a presença da pasta de configuração, mas não contou nem validou individualmente as 500 missões.
-- O pacote contém manifesto e overrides; os JARs continuam sendo baixados por um launcher compatível com CurseForge.
-
-## Limites
-
-A verificação cobre os metadados de dependência publicados pelo CurseForge para os arquivos listados. Ela não substitui um teste de inicialização real no launcher nem garante ausência de incompatibilidades entre mods.
+- StoneBlock Utilities: projectID 282561, fileID 9131646.
+- Stone Crafting Table: projectID 302475, fileID 2722058.
+- Void Island Control: projectID 257655, fileID 2666967.
+- World Primer: projectID 258911, fileID 2489010.
