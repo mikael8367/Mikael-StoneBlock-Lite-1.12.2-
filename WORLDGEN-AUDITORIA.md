@@ -1,72 +1,59 @@
-# Auditoria profunda de criação de mundo — Mikael StoneBlock Lite 1.12.2
+# Auditoria de travamentos e encerramentos — Mikael StoneBlock Lite 1.12.2
 
-Versão: 0.5.15  
+Versão auditada: 0.5.16  
 Minecraft: 1.12.2  
 Forge: 14.23.5.2860
 
-## Resultado
+## Correções e verificações do pacote
 
-A revisão encontrou e corrigiu uma referência de item inicial órfã e fortaleceu o validador para analisar o preset de geração e a estrutura NBT da ilha antes de empacotar.
+- Inventário inicial agora tem 36 slots com item vanilla válido e quantidade zero; não depende de Better Questing.
+- StoneBlock Utilities 2.2.0 usa o esquema novo de `stoneblockutilities.json`. O pacote inclui o arquivo correto; atualização de instalação antiga exige substituir a configuração antiga.
+- O validador verifica os campos `handDrops` e `crookDrops`, nomes de blocos/itens, metadados, limites de chance e velocidade, quantidade de drops e dependência de Ex Nihilo Creatio.
+- Preset de mundo: 256 camadas, com 255 pedras e lava no topo.
+- Configuração exige dimensão 0, Nether/End vanilla, tipo de ilha registrado, spawn automático e as distâncias previstas.
+- NBT da ilha: arquivo GZIP/NBT decodificado, 11×11×11, 1.331 posições únicas, marcador único e espaço de nascimento livre.
+- Servidor dedicado: `level-type=voidworld`.
 
-## 1. Correção aplicada: item inicial inválido
+## Tela Criar mundo
 
-A configuração antiga continha bqt:bqt:0*1 em startingItems. O manifesto não contém Better Questing Triggerer (projectID 250193) nem Better Questing (projectID 238856), requisito do Triggerer. O item não podia ser resolvido pelo comando de item do Minecraft. O método de inventário inicial do Void Island Control captura essa falha, limpa o inventário e exibe um erro.
+O código original do Void Island Control intercepta a abertura de `GuiCreateWorld` a partir de `GuiWorldSelection` e tenta selecionar o tipo especial registrado. O método de seleção percorre `WorldType.WORLD_TYPES`; se não encontrar o tipo, retorna índice 0 (Padrão). Isso pode produzir mundo errado sem necessariamente gerar um crash.
 
-A referência foi substituída por 36 entradas válidas minecraft:stone:0*0. O item vanilla existe, mas a quantidade zero deixa os slots vazios; isso mantém o tamanho de inventário esperado pelo loop do mod. Não adicionamos Better Questing: o modpack usa FTB Quests e não precisa de um segundo sistema de quests.
+**Como conferir:** abra Singleplayer → Criar novo mundo e olhe o seletor de tipo de mundo antes de clicar em Criar. Confirme `Void? World`. Não use `Default/Padrão` nem o `Superflat` vanilla.
 
-## 2. Verificação do tipo de mundo
+Foi identificado no código upstream um erro em `WorldTypeVoid.isCustomizable()`: a condição repete `CUSTOMIZED` em vez de verificar `WORLDTYPE`. Isso afeta a disponibilidade do botão Customize para a configuração WORLDTYPE; o pack usa SUPERFLAT, então não deve bloquear a tela atual.
 
-- worldGenType=SUPERFLAT.
-- Preset 3;255*minecraft:stone,minecraft:lava.
-- A validação lê cada camada, valida os identificadores e confere 256 camadas no total.
-- baseDimension=0.
-- islandYLevel=88.
-- islandDistance=1000.
-- islandMainSpawnType=island e islandSpawnType=island.
-- A lista customIslands contém island.
+## Histórico upstream relevante
 
-**Conferência na tela de criação:** no fluxo normal Singleplayer → seleção de mundos → Criar novo mundo, o evento do Void Island Control tenta pré-selecionar **Void? World**. Confirme que essa opção aparece selecionada antes de criar. O preset só é usado pelo gerador personalizado; Padrão e Superflat vanilla não ativam essa lógica de ilhas.
+- [VIC #69](https://github.com/Bartz24/VoidIslandControl/issues/69): `IndexOutOfBoundsException` ao criar ilha com dimensão base diferente da principal e lista vazia. O pack fixa `baseDimension=0`; a falha relatada não é reproduzida por essa configuração.
+- [VIC #67](https://github.com/Bartz24/VoidIslandControl/issues/67): crash por tipo/estrutura de ilha customizada inválida. O pack fixa os tipos `island`, a lista `customIslands` e valida o arquivo NBT/marcador.
+- [VIC #27](https://github.com/Bartz24/VoidIslandControl/issues/27): jogador preso após renascer em ilha customizada numa versão antiga 1.3.2. A estrutura atual passa pelas verificações de espaço livre, mas só o teste no jogo pode confirmar o respawn.
+- [VIC #70](https://github.com/Bartz24/VoidIslandControl/issues/70): relato de perda de ilha após crash e saída de LAN. StoneBlock Utilities 2.2.0 adiciona backup da ilha nos dados individuais dos jogadores e recuperação quando `VICData.dat` é perdido.
+- [VIC #86](https://github.com/Bartz24/VoidIslandControl/issues/86): falhas ao criar ilhas em dimensão não vanilla. Este pack usa dimensão 0 e mantém Nether/End vanilla.
 
-## 3. Verificação estrutural do island.nbt
+Os issues são relatos históricos; não provam que o mesmo defeito acontece na configuração atual.
 
-O validador agora descompacta e interpreta o NBT de verdade, em vez de conferir apenas se o arquivo existe.
+## StoneBlock Utilities: risco de config antiga
 
-- GZIP/NBT válido.
-- DataVersion 1343, correspondente à era do Minecraft 1.12.2.
-- Dimensões 11 × 11 × 11.
-- 1.331 entradas de blocos.
-- Paleta contém pedra, ar e bloco de estrutura.
-- Exatamente um bloco de estrutura em modo DATA com metadado spawn_point.
-- O marcador está em [5, 2, 5] e gera offset de spawn [0, 2, 0] após centralizar a ilha.
-- O validador verifica espaço livre para pés/cabeça e o bloco de piso central.
-- As posições de todos os blocos precisam estar dentro dos limites 11 × 11 × 11.
+O StoneBlock oficial 1.0.38 avisa que o arquivo antigo `config/stoneblockutilities.json` causa crash na inicialização após atualizar para SBU 2.2.0; a nova configuração precisa ser aplicada também em instalações existentes. O pacote 0.5.16 contém o formato atualizado. Se o launcher preservou a config anterior, substitua-a pela versão de `overrides/config/stoneblockutilities.json` após fazer backup.
 
-## 4. Comportamentos que parecem estranhos, mas são intencionais
+Referência: https://www.curseforge.com/minecraft/modpacks/stoneblock/files/9131806
 
-Com autoCreate=true, o Void Island Control prepara a ilha principal no centro (0,0) e depois cria uma ilha individual para o primeiro jogador. Como a primeira posição livre da grade é (-1,-1), a primeira ilha pessoal fica a 1.000 blocos nos eixos X e Z do centro. O jogador é levado para a ilha individual. Isso pode parecer uma duplicação, mas corresponde ao fluxo de hub + ilha pessoal.
+## Encerramento inesperado durante o jogo
 
-A proteção de spawn está ligada e cobre uma área central de 500 blocos; a ilha pessoal fica além desse raio. Não alteramos essa proteção para não bloquear a progressão.
+O manifesto atual não inclui Cyclic (Project ID 239286). Portanto, o crash loop histórico do StoneBlock oficial causado pela poção Saturation do Cyclic não corresponde à lista atual deste pacote.
 
-## 5. Riscos conhecidos do mod upstream
+A tela que parece congelada também pode estar aguardando geração/carregamento de chunks. O gerador usa 256 camadas por coluna de chunk; em Android com pouca memória disponível, um pico de memória/GC pode fechar o processo. Isso não pode ser confirmado sem o log do aparelho.
 
-- O código upstream de Void Island Control tem uma condição repetida em isCustomizable(): a ramificação para WORLDTYPE parece testar CUSTOMIZED novamente. Isso afeta o botão Customize apenas se worldGenType=WORLDTYPE; o modpack usa SUPERFLAT e não passa por esse caminho.
-- O projeto original Void Island Control declara que não recebe mais suporte/atualizações. Não foi trocado por um fork, porque substituir o gerador de mundo pode afetar saves existentes.
-- StoneBlock Utilities 2.2.0 Beta inclui correção de recuperação dos dados das ilhas do VIC quando o arquivo data/VICData.dat é perdido após falha de gravação. Ainda assim, faça backup dos mundos.
-- A análise estática não consegue simular o botão Criar Mundo, a geração de chunks nem os eventos de primeiro login no jogo.
+## Como classificar o próximo crash
 
-## 6. O que o build verifica agora
+- `Failed to load cfg`, `handDrops` ou `crookDrops`: provável config antiga/corrompida do StoneBlock Utilities.
+- `IndexOutOfBoundsException` em `getSpawnOffset` ou `IslandGenerations.get`: tipo de ilha inexistente/desativado ou lista de gerações vazia.
+- `OutOfMemoryError`, `GC overhead limit exceeded` ou encerramento sem crash report: suspeita de pressão de memória/processo encerrado pelo Android; verificar `latest.log` e o log do sistema.
+- Travamento depois de morrer/renascer: verificar posição do marcador, espaço livre e stack trace de `PlayerRespawnEvent`.
+- Tela Create World mostra Padrão: tipo `Void? World` não foi selecionado/registrado; não criar esse save até confirmar.
 
-- Formato do manifesto, versão de Minecraft/Forge, IDs únicos e obrigatoriedade dos mods.
-- IDs/arquivos exatos de StoneBlock Utilities, Stone Crafting Table, Void Island Control e World Primer.
-- Sintaxe e 256 camadas do preset superflat.
-- Tipo de mundo, dimensão, coordenadas e nomes da ilha.
-- Referências de item inicial órfãs conhecidas.
-- Estrutura NBT comprimida, paleta, blocos, marcador, offset e espaço de spawn.
-- Empacotamento de manifest + overrides e recuperação condicional de FTB Quests.
+Não apague saves. Faça cópia antes de testar qualquer alteração.
 
-**Limite:** build aprovado significa que os arquivos passaram nessas verificações. Não comprova que Minecraft inicializa ou gera um mundo real sem crash; isso ainda precisa de teste no launcher e análise de latest.log.
+## Limites
 
-
-### Nota de implementação do inventário inicial
-
-O código do Void Island Control percorre pelo menos 36 posições do array startingItems. Por isso, o build agora exige exatamente 36 entradas parseáveis e verificáveis. Cada slot usa minecraft:stone com quantidade zero: item registrado no Minecraft base, sem entregar itens ao jogador.
+O validador verifica arquivos e metadados. Não clica na tela do Minecraft, não carrega Forge, não gera chunks reais e não reproduz a saída para o menu. Para fechar a investigação de um crash real, é necessário o `latest.log` ou arquivo em `crash-reports` obtido no launcher Android.
