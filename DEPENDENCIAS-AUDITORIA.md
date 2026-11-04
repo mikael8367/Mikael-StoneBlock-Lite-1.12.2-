@@ -8,7 +8,7 @@ Forge: 14.23.5.2860
 
 - StoneBlock Utilities atualizado de fileID 2706845 (2.1.5) para fileID 9131646 (2.2.0 Beta), projeto 282561.
 - Stone Crafting Table adicionado: projectID 302475, fileID 2722058 (1.12.2 Forge).
-- Void Island Control (projectID 257655) e World Primer (projectID 258911) mantidos.
+- Void Island Control Remastered (projectID 1709173) e World Primer (projectID 258911) mantidos; World Primer foi atualizado na versão 0.5.18.
 - A versão 2.2.0 Beta do StoneBlock Utilities informa correções para crash do Ex Compressum ao processar alimentos com efeitos de poção em fake players, restauração/persistência de ilhas do Void Island Control e drops do crook.
 - Forge 14.23.5.2860 satisfaz o requisito mínimo informado de 14.23.5.2792 para o arquivo 2.2.0.
 
@@ -46,7 +46,7 @@ O workflow valida:
 - StoneBlock Utilities: projectID 282561, fileID 9131646.
 - Stone Crafting Table: projectID 302475, fileID 2722058.
 - Void Island Control: projectID 257655, fileID 2666967.
-- World Primer: projectID 258911, fileID 2489010.
+- World Primer: projectID 258911, fileID 2866063 (0.6.0-dev.20200122.211517).
 
 
 ## Revisão de criação de mundo 0.5.15
@@ -63,4 +63,10 @@ A análise de tela de criação, crashes de entrada/saída, configuração antig
 - Substituído Void Island Control original (project 257655 / file 2666967) por Void Island Control Remastered 1.5.5 (project 1709173 / file 8980529).
 - Forge 14.23.5.2860 mantido; atende ao mínimo >=14.23.5.2856 declarado pelo remaster e ao requisito 2860+ do SBU 2.2.0.
 - `resetInventory=false` evita limpeza automática do inventário durante criação/recuperação de ilha.
+
+## Correção do crash World Primer 0.5.18
+- Crash report confirmou `NullPointerException` em `WorldPrimer.onFingerPrintViolation(WorldPrimer.java:118)` durante `Initializing game`.
+- Atualizado World Primer de fileID 2489010 (0.5.0) para fileID 2866063 (0.6.0-dev.20200122.211517), release Forge 1.12.2.
+- O validador exige exatamente o novo fileID para impedir regressão para a versão 0.5.0.
+- A correção é direcionada ao crash reportado; ainda exige teste no CS Launcher Plus/Android para confirmar que não há outro crash posterior.
 - O changelog do remaster 1.5.5 registra a correção do crash de criação de mundo #2 da versão 1.5.4.
