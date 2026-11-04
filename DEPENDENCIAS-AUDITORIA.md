@@ -47,3 +47,8 @@ O workflow valida:
 - Stone Crafting Table: projectID 302475, fileID 2722058.
 - Void Island Control: projectID 257655, fileID 2666967.
 - World Primer: projectID 258911, fileID 2489010.
+
+
+## Revisão de criação de mundo 0.5.15
+
+A auditoria dedicada de geração de mundo está em `WORLDGEN-AUDITORIA.md`. A revisão removeu a referência órfã `bqt:bqt:0*1` do inventário inicial e adicionou verificações do preset superflat e do NBT da ilha customizada ao build.
