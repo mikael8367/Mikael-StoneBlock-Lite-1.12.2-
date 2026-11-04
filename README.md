@@ -1,4 +1,4 @@
-# Mikael StoneBlock Lite 0.5.17
+# Mikael StoneBlock Lite 0.5.18
 
 Modpack para Minecraft Java **1.12.2**, com **Forge 14.23.5.2860**.
 
@@ -22,7 +22,7 @@ Guia: [LEIA-ME-CRIAR-MUNDO-PTBR.txt](overrides/LEIA-ME-CRIAR-MUNDO-PTBR.txt).
 
 - 66 referências CurseForge no manifesto.
 - StoneBlock Utilities 2.2.0 Beta e Stone Crafting Table.
-- Void Island Control Remastered 1.5.5 + World Primer.
+- Void Island Control Remastered 1.5.5 + World Primer 0.6.0-dev.20200122.211517 (atualizado após crash de inicialização na 0.5.0).
 - Preset superflat com 255 camadas de pedra e 1 camada de lava.
 - Ilha personalizada de estrutura NBT 11 × 11 × 11.
 - FTB Library, FTB Utilities, FTB Quests e FTB Backups.
