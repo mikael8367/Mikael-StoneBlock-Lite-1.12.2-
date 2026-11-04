@@ -1,12 +1,22 @@
-# Mikael StoneBlock Lite 0.5.15
+# Mikael StoneBlock Lite 0.5.16
 
 Modpack para Minecraft Java **1.12.2**, com **Forge 14.23.5.2860**.
 
 ## Criação do mundo
 
-**No single-player, confira se "Void? World" está selecionado antes de clicar em Criar.** O Void Island Control tenta pré-selecionar esse tipo ao abrir a tela pelo menu de seleção de mundos. Se estiver em Padrão ou Superflat vanilla, selecione "Void? World".
+No single-player, confirme se **Void? World** está selecionado antes de clicar em Criar. O Void Island Control tenta pré-selecionar esse tipo no fluxo normal Singleplayer → seleção de mundos → Criar novo mundo. Padrão e Superflat vanilla não ativam a geração personalizada.
 
-Leia o guia: [LEIA-ME-CRIAR-MUNDO-PTBR.txt](overrides/LEIA-ME-CRIAR-MUNDO-PTBR.txt).
+No servidor dedicado, o arquivo incluído usa `level-type=voidworld`.
+
+Guia: [LEIA-ME-CRIAR-MUNDO-PTBR.txt](overrides/LEIA-ME-CRIAR-MUNDO-PTBR.txt).
+
+## Correções e verificações de crash
+
+- Inventário inicial corrigido para 36 slots válidos e vazios; removida referência Better Questing que não existia no manifesto.
+- StoneBlock Utilities 2.2.0: formato JSON atualizado incluído. Instalações antigas precisam substituir o arquivo antigo `config/stoneblockutilities.json` pelo arquivo deste pacote; a versão nova do mod não migra automaticamente o esquema antigo.
+- Nether e End mantêm os provedores vanilla; o pack não tenta sobrescrevê-los como dimensões vazias.
+- Validador inspeciona o preset superflat, dimensões, tipo de mundo, configuração SBU e toda a estrutura NBT da ilha.
+- A configuração da ilha exige o tipo `island` e o arquivo `island.nbt`.
 
 ## Conteúdo
 
@@ -19,14 +29,12 @@ Leia o guia: [LEIA-ME-CRIAR-MUNDO-PTBR.txt](overrides/LEIA-ME-CRIAR-MUNDO-PTBR.t
 
 ## Instalação
 
-O repositório contém manifesto CurseForge e a pasta overrides. Um launcher compatível deve baixar os arquivos do manifesto e aplicar os overrides. Os JARs não são armazenados individualmente aqui.
+O repositório contém manifesto CurseForge e a pasta `overrides`. Um launcher compatível deve baixar os arquivos do manifesto e aplicar os overrides. Os JARs não são armazenados individualmente aqui.
 
 O ZIP é gerado pelo GitHub Actions. Abra **Actions → Validar e empacotar modpack**, selecione a execução mais recente e baixe o artefato.
 
-## Validação e limitações
+## Diagnóstico
 
-O script verifica IDs e dependências estáticas, preset de mundo, referências do inventário inicial e a estrutura NBT comprimida (dimensões, paleta, marcador de spawn e espaço de jogador). A auditoria detalhada está em [WORLDGEN-AUDITORIA.md](WORLDGEN-AUDITORIA.md).
+Se o Minecraft fechar ao iniciar, abrir a tela de criação ou entrar no mundo, guarde `latest.log` e o relatório em `crash-reports`. Não apague o save nem as configurações antes de fazer uma cópia. Consulte [WORLDGEN-AUDITORIA.md](WORLDGEN-AUDITORIA.md).
 
-Essas verificações não substituem a inicialização real do Minecraft nem garantem ausência de incompatibilidades em runtime. Se houver falha, envie latest.log ou crash-reports.
-
-OptiFine não está incluído.
+As verificações automáticas são estáticas; não iniciam o Minecraft e não garantem ausência de crash em runtime. OptiFine não está incluído.
