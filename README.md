@@ -4,7 +4,7 @@ Modpack para Minecraft Java **1.12.2**, com **Forge 14.23.5.2860**.
 
 ## Criação do mundo
 
-**No single-player, selecione o tipo de mundo "Void? World" antes de clicar em Criar.** O preset de pedra é aplicado pelo gerador do Void Island Control; Padrão e Superflat vanilla não ativam a ilha personalizada.
+**No single-player, confira se "Void? World" está selecionado antes de clicar em Criar.** O Void Island Control tenta pré-selecionar esse tipo ao abrir a tela pelo menu de seleção de mundos. Se estiver em Padrão ou Superflat vanilla, selecione "Void? World".
 
 Leia o guia: [LEIA-ME-CRIAR-MUNDO-PTBR.txt](overrides/LEIA-ME-CRIAR-MUNDO-PTBR.txt).
 
