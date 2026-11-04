@@ -1,8 +1,10 @@
-# Mikael StoneBlock Lite 0.5.18
+# Mikael StoneBlock Lite 0.5.19
 
 - Minecraft Java 1.12.2
 - Forge 14.23.5.2860
-- 66 referências CurseForge no manifesto
+- 65 referências CurseForge no manifesto
+- JEI 4.16.5.1030 Release — projectID 238222, fileID 8752694
+- JourneyMap removido do manifesto
 - StoneBlock Utilities 2.2.0 — config no formato atualizado
 - Stone Crafting Table 1.0.3
 - Void Island Control Remastered 1.5.5 — projeto 1709173, arquivo 8980529
@@ -15,4 +17,4 @@
 - JARs baixados por launcher compatível com CurseForge; não versionados neste repositório
 - Configuração FTB Quests recuperada de ZIP antigo durante o build, quando disponível; quantidade de missões precisa ser validada em jogo
 - Single-player: confirmar "Void? World"; servidor dedicado: level-type=voidworld
-- OptiFine não incluído
+- OptiFine não incluído; `optionsof.txt` força Fast Render, Render Regions e Smooth World para OFF quando OptiFine está instalado

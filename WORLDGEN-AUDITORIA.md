@@ -76,3 +76,16 @@ O Forge 14.23.5.2860 foi mantido; o remaster declara suporte a 14.23.5.2856 ou s
 
 ### Limites
 A substituição corrige um defeito conhecido do mod na tela de criação e melhora a tolerância à reflexão. Não comprova ausência de travamentos causados por outros mods, pressão de memória Android, drivers gráficos ou geração de chunks. O teste definitivo exige abrir o Minecraft e obter `latest.log` se houver falha.
+
+
+## Teste de renderização Android — revisão 0.5.19
+
+O log de teste mostrou OptiFine HD U G5 sobre GL4ES 1.1.5 e GPU PowerVR GE8320. Também registrou `ofFastRender:true`. Como o OptiFine não faz parte do manifesto, o pacote não consegue controlar a versão instalada pelo launcher, mas agora distribui `optionsof.txt` com:
+
+- `ofFastRender:false`
+- `ofRenderRegions:false`
+- `ofSmoothWorld:false`
+
+O JEI foi fixado em 4.16.5.1030 Release, pois a versão 4.22.0.1034 do log falhou ao ler `Tags.class`. JourneyMap foi retirado para cumprir o pedido de remoção e reduzir uma dependência de renderização/recursos do cliente.
+
+**Validação pendente:** instalar a instância limpa, confirmar que o launcher aplicou `optionsof.txt`, entrar num mundo novo com `Void? World` e conferir `latest.log`. Se a tela continuar preta, o próximo teste é iniciar sem OptiFine mantendo os mesmos mods e renderer. Não reutilizar um save criado com tipo de mundo incorreto.

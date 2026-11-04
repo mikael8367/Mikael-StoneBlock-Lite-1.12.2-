@@ -308,6 +308,12 @@ assert by_project.get(302475) == 2722058, "Stone Crafting Table ausente"
 assert by_project.get(1709173) == 8980529, "Void Island Control Remastered 1.5.5 ausente"
 assert 257655 not in by_project, "Versão original do Void Island Control ainda está no manifesto"
 assert by_project.get(258911) == 2866063, "World Primer 0.6.0-dev.20200122.211517 ausente; não usar 0.5.0"
+assert by_project.get(238222) == 8752694, "JEI deve usar 4.16.5.1030 Release"
+assert 32274 not in by_project, "JourneyMap foi solicitado para remoção"
+optionsof_path = overrides / "optionsof.txt"
+optionsof_text = optionsof_path.read_text(encoding="utf-8")
+for option in ("ofFastRender:false", "ofRenderRegions:false", "ofSmoothWorld:false"):
+    assert option in optionsof_text, f"Opção OptiFine segura ausente: {option}"
 
 overrides = ROOT / "overrides"
 assert overrides.is_dir(), "Pasta overrides ausente"
@@ -331,12 +337,20 @@ with tempfile.TemporaryDirectory() as td:
     shutil.copytree(overrides, stage / "overrides", dirs_exist_ok=True)
     quest_dir = stage / "overrides" / "config" / "ftbquests"
     if not quest_dir.exists():
+        def archive_version_key(path):
+            match = re.search(r"-(\\d+(?:\\.\\d+)+)\\.zip$", path.name)
+            return tuple(int(part) for part in match.group(1).split(".")) if match else (-1,)
+
         archives = sorted(ROOT.glob("Mikael-StoneBlock-Lite-*.zip"),
-                          key=lambda p: p.stat().st_size, reverse=True)
+                          key=archive_version_key, reverse=True)
         recovered = False
         for archive in archives:
             try:
                 with zipfile.ZipFile(archive) as zf:
+                    bad_member = zf.testzip()
+                    if bad_member is not None:
+                        warnings.append(f"CRC inválido em {archive.name}: {bad_member}")
+                        continue
                     matches = [n for n in zf.namelist() if
                                n.replace("\\", "/").startswith(
                                    ("overrides/config/ftbquests/", "config/ftbquests/"))]
@@ -345,9 +359,13 @@ with tempfile.TemporaryDirectory() as td:
                         marker = ("overrides/config/ftbquests/" if normalized.startswith(
                             "overrides/config/ftbquests/") else "config/ftbquests/")
                         relative = normalized.split(marker, 1)[1]
-                        if not relative or ".." in Path(relative).parts:
+                        relative_path = Path(relative)
+                        if (not relative or relative_path.is_absolute() or
+                                ".." in relative_path.parts or
+                                any(part in ("", ".") for part in relative_path.parts)):
+                            warnings.append(f"Caminho FTB Quests inseguro ignorado em {archive.name}: {name}")
                             continue
-                        target = quest_dir / relative
+                        target = quest_dir / relative_path
                         if name.endswith("/"):
                             target.mkdir(parents=True, exist_ok=True)
                         else:
@@ -355,7 +373,8 @@ with tempfile.TemporaryDirectory() as td:
                             target.write_bytes(zf.read(name))
                     recovered = quest_dir.exists() and any(quest_dir.rglob("*"))
                     if recovered:
-                        warnings.append(f"Config FTB Quests recuperada de {archive.name}; validar missões no jogo.")
+                        quest_file_count = sum(1 for p in quest_dir.rglob("*") if p.is_file())
+                        warnings.append(f"Config FTB Quests recuperada de {archive.name} ({quest_file_count} arquivos); validar missões no jogo.")
                         break
             except (zipfile.BadZipFile, OSError, KeyError) as exc:
                 warnings.append(f"Não foi possível ler {archive.name}: {exc}")
@@ -368,6 +387,9 @@ with tempfile.TemporaryDirectory() as td:
         "Minecraft: 1.12.2",
         "Forge: 14.23.5.2860",
         f"Entradas CurseForge: {len(files)}",
+        "JEI: 4.16.5.1030 Release",
+        "JourneyMap: removido",
+        "OptiFine: não incluído; opções seguras distribuídas em optionsof.txt",
         f"Project IDs únicos: {len(set(projects))}",
         f"File IDs únicos: {len(set(file_ids))}",
         "World type: Void? World (pré-seleção do single-player deve ser conferida)",
@@ -383,6 +405,7 @@ with tempfile.TemporaryDirectory() as td:
         "Nether/End: providers vanilla preservados (overrides void desativados)",
         "Server level-type: voidworld",
         f"Config FTB Quests presente: {'sim' if quest_dir.exists() else 'não'}",
+        f"Arquivos FTB Quests: {sum(1 for p in quest_dir.rglob('*') if p.is_file()) if quest_dir.exists() else 0}",
         "Validação estática; não comprova inicialização real do Minecraft."
     ] + ["AVISO: " + w for w in warnings]
     (stage / "BUILD-REPORT.txt").write_text("\n".join(report) + "\n", encoding="utf-8")

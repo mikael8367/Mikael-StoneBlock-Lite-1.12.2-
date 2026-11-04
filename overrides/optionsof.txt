@@ -1,0 +1,3 @@
+ofFastRender:false
+ofRenderRegions:false
+ofSmoothWorld:false

@@ -1,3 +1,16 @@
+# Atualização de estabilidade — 0.5.19
+
+- JEI fixado em 4.16.5.1030 Release (projectID 238222, fileID 8752694). O log de teste registrou falha de leitura de `Tags.class` na build 4.22.0.1034; a troca evita usar essa build Beta no pacote.
+- JourneyMap (projectID 32274) removido do manifesto conforme solicitado.
+- Incluído `overrides/optionsof.txt` com Fast Render, Render Regions e Smooth World desativados para reduzir incompatibilidades conhecidas da combinação OptiFine/GL4ES.
+- O OptiFine continua fora do manifesto; o arquivo de opções só atua quando OptiFine está instalado.
+- O empacotador agora ordena arquivos antigos por versão numérica (não por tamanho), testa CRC antes de extrair dados de FTB Quests e rejeita caminhos inseguros.
+- O empacotador valida o pin do JEI, a ausência do JourneyMap e as opções de renderização; também testa a integridade do ZIP final.
+
+**Limite:** essas alterações corrigem o pacote e sua distribuição. Não provam que a tela preta/0 FPS foi eliminada em runtime; isso depende de teste no CS Launcher Plus com o mesmo renderer Android.
+
+---
+
 # Auditoria técnica — Mikael StoneBlock Lite 1.12.2
 
 Versão: 0.5.14  
@@ -38,7 +51,7 @@ O workflow valida:
 - StoneBlock Utilities 2.2.0 é Beta, não Release estável. Foi escolhido porque contém correções relevantes para os mods que já estão no pack; ainda exige teste real.
 - Stone Crafting Table adiciona uma bancada distinta da bancada de trabalho do StoneBlock Utilities. São dois mods diferentes; verificar receitas e registro de blocos em jogo.
 - A pasta FTB Quests é recuperada de um ZIP antigo no build. O número e a integridade das missões não são confirmados automaticamente.
-- Nenhum workflow estático consegue provar que os 66 mods iniciam juntos. É necessário obter `latest.log` ou `crash-reports` de uma execução real.
+- Nenhum workflow estático consegue provar que os 65 mods iniciam juntos. É necessário obter `latest.log` ou `crash-reports` de uma execução real.
 - Os JARs são baixados pelo launcher compatível com CurseForge; não estão armazenados neste repositório.
 
 ## Referências CurseForge

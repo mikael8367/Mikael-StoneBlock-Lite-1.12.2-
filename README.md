@@ -1,4 +1,4 @@
-# Mikael StoneBlock Lite 0.5.18
+# Mikael StoneBlock Lite 0.5.19
 
 Modpack para Minecraft Java **1.12.2**, com **Forge 14.23.5.2860**.
 
@@ -20,12 +20,15 @@ Guia: [LEIA-ME-CRIAR-MUNDO-PTBR.txt](overrides/LEIA-ME-CRIAR-MUNDO-PTBR.txt).
 
 ## Conteúdo
 
-- 66 referências CurseForge no manifesto.
+- 65 referências CurseForge no manifesto (JourneyMap removido).
+- JEI 4.16.5.1030 Release (substitui a build 4.22.0.1034 que falhou ao ler uma classe no log de teste).
 - StoneBlock Utilities 2.2.0 Beta e Stone Crafting Table.
 - Void Island Control Remastered 1.5.5 + World Primer 0.6.0-dev.20200122.211517 (atualizado após crash de inicialização na 0.5.0).
 - Preset superflat com 255 camadas de pedra e 1 camada de lava.
 - Ilha personalizada de estrutura NBT 11 × 11 × 11.
 - FTB Library, FTB Utilities, FTB Quests e FTB Backups.
+- JourneyMap removido do manifesto.
+- `optionsof.txt` incluído com Fast Render, Render Regions e Smooth World desativados para instalações que usam OptiFine/GL4ES.
 
 ## Instalação
 
@@ -37,4 +40,4 @@ O ZIP é gerado pelo GitHub Actions. Abra **Actions → Validar e empacotar modp
 
 Se o Minecraft fechar ao iniciar, abrir a tela de criação ou entrar no mundo, guarde `latest.log` e o relatório em `crash-reports`. Não apague o save nem as configurações antes de fazer uma cópia. Consulte [WORLDGEN-AUDITORIA.md](WORLDGEN-AUDITORIA.md).
 
-As verificações automáticas são estáticas; não iniciam o Minecraft e não garantem ausência de crash em runtime. OptiFine não está incluído.
+As verificações automáticas são estáticas; não iniciam o Minecraft e não garantem ausência de crash em runtime. OptiFine não está incluído. Se o launcher preservar um `optionsof.txt` antigo, substitua-o pelo arquivo deste pacote ou faça uma instalação limpa para aplicar as opções seguras. O arquivo de opções não substitui o teste real no Android.
