@@ -78,12 +78,12 @@ with tempfile.TemporaryDirectory() as td:
         "Observação: os JARs são baixados pelo launcher compatível com o manifesto CurseForge.",
         "Este pacote não comprova inicialização bem-sucedida do jogo."
     ] + ["AVISO: " + w for w in warnings]
-    (stage / "BUILD-REPORT.txt").write_text("\\n".join(report) + "\\n", encoding="utf-8")
+    (stage / "BUILD-REPORT.txt").write_text("\n".join(report) + "\n", encoding="utf-8")
 
     output = OUT / f"Mikael-StoneBlock-Lite-{data['version']}.zip"
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
         for path in sorted(stage.rglob("*")):
             if path.is_file():
                 zf.write(path, path.relative_to(stage).as_posix())
-    print("\\n".join(report))
+    print("\n".join(report))
     print(f"Pacote criado: {output}")
