@@ -311,7 +311,7 @@ vic_cfg = vic_path.read_text(encoding="utf-8")
 stone_cfg = json.loads(stone_path.read_text(encoding="utf-8"))
 validate_world_config(vic_cfg, stone_cfg, set(projects))
 server_properties = (ROOT / "overrides" / "server.properties").read_text(encoding="utf-8")
-assert re.search(r"^level-type=voidworld\\s*$", server_properties, re.M), (
+assert re.search(r"^level-type=voidworld\s*$", server_properties, re.M), (
     "server.properties precisa usar level-type=voidworld para servidores dedicados"
 )
 structure_info = validate_structure(structure_path, int(config_value(vic_cfg, "islandYLevel", "I")))
